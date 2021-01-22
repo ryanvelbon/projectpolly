@@ -1,0 +1,20 @@
+.post-a-sentence {
+	padding: 16px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.post-a-sentence header,
+.sentences header{
+	margin-bottom: 20px;
+}
+
+.sentences .sentence {
+	padding-left: 10px;
+	border-left: 3px solid #a21b24;
+	margin-bottom: 30px;
+}
+
+.sentences .sentence .info {
+	color: #aaa;
+	font-style: italic;
+}
