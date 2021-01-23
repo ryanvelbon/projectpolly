@@ -17,7 +17,6 @@ class CreateProfilesTable extends Migration
             $table->date('dob')->nullable();
             $table->boolean('gender')->nullable();
             $table->string('bio', 300)->nullable();
-            // $table->bigInteger('nationality')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('native_lang')->references('id')->on('languages');
             $table->foreign('nationality')->references('id')->on('countries');

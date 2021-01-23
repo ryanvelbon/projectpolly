@@ -19,6 +19,16 @@ use App\Http\Controllers\SentenceController;
 |
 */
 
+
+use Illuminate\Support\Facades\DB;
+Route::get('/test', function() {
+
+	$languages = DB::select('SELECT * FROM languages');
+	return view('test', ['languages' => $languages]);
+});
+
+
+
 Route::get('/', function () {
     return view('home');
 });

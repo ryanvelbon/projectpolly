@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-        	LanguagesTableSeeder::class,
+        	// LanguagesTableSeeder::class, // manually import app\database\raw\languages.csv
             CountriesTableSeeder::class,
         	UserSeeder::class,
         	ProfileSeeder::class,

@@ -10,8 +10,11 @@ class CreateLanguagesTable extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 2);
-            $table->string('title', 20);
+            $table->string('code', 2)->unique();
+            $table->string('title', 100)->unique();
+            $table->string('title_native', 100)->unique();
+            $table->unsignedSmallInteger('ranking')->nullable();
+
         });
     }
 
