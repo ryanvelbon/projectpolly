@@ -31,23 +31,7 @@
 			<div id="sentences" class="section-pane">
 				@if(count($user->sentences))
 					@foreach ($user->sentences as $sentence)
-					<div class="card mb-3" style="max-width: 18rem;">
-					  <div class="card-header">
-					  	<strong>{{ $user->first_name }} {{ $user->last_name }}</strong>
-					  	<small><em>{{ $user->username }}</em></small>
-					  </div>
-					  <div class="card-body">
-					    <!-- <h5 class="card-title">Success card title</h5> -->
-					    <p class="card-text">{{ $sentence->body }}</p>
-					  </div>
-					  <div class="card-footer">
-					  	<i class="fas fa-thumbs-up"></i>
-						<i class="fas fa-thumbs-down"></i>
-						<i class="fas fa-heart"></i>
-						<i class="fas fa-bookmark"></i>
-						<i class="fas fa-share"></i>
-					  </div>
-					</div>
+						@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $user])
 					@endforeach
 				@else
 					<p>No sentences published yet.</p>

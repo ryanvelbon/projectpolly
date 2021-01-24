@@ -44,3 +44,23 @@
 .language-menu .optionContainer:hover {
 	filter: grayscale(100%);
 }
+
+
+
+/*=====================SENTENCE POSTS===================================================================================*/
+
+.sentence-post {
+  /*color: red;*/
+}
+
+.sentence-post i {
+  /*font-size: 48px;
+  color: lightblue;
+  text-shadow: 2px 2px 4px #000000;*/
+  cursor: pointer;
+  color: #A8A8A8;
+}
+
+i:hover {
+  color: orange;
+}

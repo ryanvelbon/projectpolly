@@ -32,12 +32,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<header><h3>Today's contributions</h3></header>
 			@foreach ($sentences as $sentence)
-				<article class="sentence">
-					<p>{{ $sentence->body }}</p>
-					<div class="info">
-						Posted by {{ $sentence->user->username }} on {{ $sentence->created_at }}
-					</div>
-				</article>
+				@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $sentence->user])
 			@endforeach
 		</div>
 	</section>
