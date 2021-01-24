@@ -16,9 +16,13 @@
 	<h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
 	<p>{{ $user->username }}</p>
 
+	<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}">Follow</button>
+
 
 
 	<div class="container">
+		<br>
+		<br>
 		<nav class="profile-nav">
 			<a data-id="overview" class="section-tab active">Overview</a>
 			<a data-id="sentences" class="section-tab">Sentences</a>
@@ -78,6 +82,7 @@
 @section('jsBottom')
 
 <script type="text/javascript">
+	// sections----------------------------------------------------------------------------------------------------
 	document.querySelectorAll('.section-tab')
 	  .forEach(e => e.addEventListener('click', _ => change(e.dataset.id)))
 
@@ -87,6 +92,32 @@
 	  panels.forEach(p => p.classList.remove('active'))
 	  document.getElementById(x).classList.add('active')
 	}
+
+	// follow buttons-------------------------------------------------------------------------------------------------
+	$(".follow-btn").click(function(event) {
+
+		event.preventDefault();
+
+		$.ajax({
+			type: "POST",
+			url: "/update-follow-status",
+			data: {
+				id: $(this).val(),
+				_token: "{{ csrf_token() }}"
+			},
+			success: function(response) {
+				console.log(response);
+				if(response['isFollowing']){
+					// make button responsiveness : make button reflect the new state
+				}else{
+					// same
+				}
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	});
 </script>
 
 @endsection
