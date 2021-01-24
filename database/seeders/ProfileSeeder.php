@@ -16,7 +16,7 @@ class ProfileSeeder extends Seeder
     {
     	$users = User::all();
 
-    	$languages = DB::select('SELECT * FROM languages');
+    	$languages = DB::select('SELECT * FROM languages WHERE ranking <= 15');
     	$countries = DB::select('SELECT * FROM countries');
 
     	foreach($users as $user){

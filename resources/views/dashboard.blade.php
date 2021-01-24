@@ -15,7 +15,7 @@
 <div class="container">
 	<section class="row post-a-sentence">
 		<div class="col-md-6 col-md-offset-3">
-			<header><h3>Write a sentence!</h3></header>
+			<header><h2>Write a sentence!</h2></header>
 			<!-- onsubmit="return validatePublishSentenceForm()" -->
 			<form name="publishSentenceForm" method="POST" action="/sentences">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -30,7 +30,7 @@
 	</section>
 	<section class="row sentences">
 		<div class="col-md-6 col-md-offset-3">
-			<header><h3>Today's contributions</h3></header>
+			<header><h2>Today's contributions</h2></header>
 			@foreach ($sentences as $sentence)
 				@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $sentence->user])
 			@endforeach

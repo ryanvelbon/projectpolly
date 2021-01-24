@@ -77,11 +77,7 @@ Route::get('/reset-password', function () {
 // we have defined our own profile/edit URI
 Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 
-Route::resource('profile', ProfileController::class)->only([
-	'index', 'show', 'update'
-]);
-
-
+Route::resource('profile', ProfileController::class)->only(['index', 'show', 'update'])->middleware('auth');
 
 
 Route::post('/update-follow-status', [AjaxController::class, 'updateFollowStatus']);
