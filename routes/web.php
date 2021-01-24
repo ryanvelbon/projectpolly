@@ -23,7 +23,7 @@ use App\Http\Controllers\SentenceController;
 use Illuminate\Support\Facades\DB;
 Route::get('/test', function() {
 
-	$languages = DB::select('SELECT * FROM languages');
+	$languages = DB::select('SELECT * FROM languages WHERE ranking <= 99');
 	return view('test', ['languages' => $languages]);
 });
 
