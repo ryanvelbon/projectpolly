@@ -21,4 +21,9 @@ class Sentence extends Model
     {
     	return $this->belongsTo('App\Models\Language');
     }
+
+    public function likes()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
 }
