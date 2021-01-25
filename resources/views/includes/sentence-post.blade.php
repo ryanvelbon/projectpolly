@@ -9,8 +9,8 @@
     {{ $sentence->body }}
   </div>
   <div class="footer">
-  	<i class="fas fa-thumbs-up"></i>
-  	<i class="fas fa-thumbs-down"></i>
+  	<i class="like-btn fas fa-thumbs-up" data-sentence-id="{{ $sentence->id }}"></i>
+  	<i class="dislike-btn fas fa-thumbs-down" data-sentence-id="{{ $sentence->id }}"></i>
   	<i class="fas fa-heart"></i>
   	<i class="fas fa-bookmark"></i>
   	<i class="fas fa-share"></i>

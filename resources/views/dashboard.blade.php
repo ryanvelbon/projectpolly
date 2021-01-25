@@ -18,7 +18,7 @@
 			<header><h2>Write a sentence!</h2></header>
 			<!-- onsubmit="return validatePublishSentenceForm()" -->
 			<form name="publishSentenceForm" method="POST" action="/sentences">
-				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="nativeLang" value="{{Auth::user()->profile->native_lang}}">
 				<div class="form-group">
 					<textarea class="form-control" name='new-sentence' id="new-sentence" rows="5" placeholder="write a sentence here"></textarea>
@@ -75,4 +75,8 @@
 		}
 	});
 </script>
+
+
+<script src="{{ asset('js/sentence.js') }}"></script>
+
 @endsection
