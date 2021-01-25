@@ -8,6 +8,9 @@
 
   --bg1: #202F34;
   --bg2: #1D3E48;/* hover */
+
+  --like: #5F5;
+  --dislike: #F66;
 }
 
 
@@ -105,16 +108,20 @@ h2 {
 }
 
 .sentence-post .footer i {
+  /*background-color: yellow;*/
+  padding: 3px; /* makes focus area larger; easier to click */
   width: 20px;
 }
 
 .sentence-post .footer i + i {
-  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .sentence-post .footer i:hover {
   color: var(--text1);
 }
+
+
 
 
 /*==========POST A SENTENCE==========================================================*/
