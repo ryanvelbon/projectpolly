@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}"> -->
 @endsection
 
 

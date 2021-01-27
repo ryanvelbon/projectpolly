@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="container">
-	<h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
+	<h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
 	<p>{{ $user->username }}</p>
 
 	<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}">Follow</button>

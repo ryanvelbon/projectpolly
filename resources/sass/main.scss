@@ -1,5 +1,6 @@
 :root {
   // these colours cannot be placed in _variables.scss because they will be compiled into hardcoded values in the css file. The browser requires these colors as variables.
+  --text3:#888;
   --like:#5F5;
   --dislike:#F66;
 }
@@ -7,8 +8,18 @@
 
 
 /*@import "./resets";*/
-@import 'variables';
 /*@import "./header"*/
+
+
+
+/* make sure you have a local installation of BS4 inside bootstrap/scss/bootstrap/ */
+/* should custom-variables be imported before or after bootstrap/scss/variables ? */
+
+@import "bootstrap/scss/functions";
+@import "custom-variables";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/bootstrap";
+
 
 
 body {
@@ -16,10 +27,13 @@ body {
 }
 
 
-h2 {
+h1, h2, h3, h4, h5, h6 {
   color: myColor(text1);
 }
 
+p {
+  color: myColor(text3);
+}
 
 
 
