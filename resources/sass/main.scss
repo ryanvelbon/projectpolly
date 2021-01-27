@@ -16,7 +16,7 @@
 /* should custom-variables be imported before or after bootstrap/scss/variables ? */
 
 @import "bootstrap/scss/functions";
-@import "custom-variables";
+@import "custom-variables"; /* comment this out if you wish to see website with BS4's default styling */
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/bootstrap";
 
@@ -24,15 +24,12 @@
 
 body {
   background-color: myColor(bg1);
+  color: myColor(text3);
 }
-
+  
 
 h1, h2, h3, h4, h5, h6 {
-  color: myColor(text1);
-}
-
-p {
-  color: myColor(text3);
+  /*color: myColor(text1);*/
 }
 
 
@@ -94,7 +91,7 @@ p {
       color: myColor(text1);
     }
 
-    em {
+    small {
       color: myColor(text3);
     }
   }
@@ -130,18 +127,19 @@ p {
 
 
 
-.post-a-sentence textarea{
-  background-color: myColor(bg1);
-
-  &::placeholder {
-    color: myColor(text3);
-  }
-
-  &:focus {
+.post-a-sentence {
+  textarea {
     background-color: myColor(bg1);
-    color: myColor(text1);
+    font-size: 50px;
+    height: 200px;
+    &::placeholder {
+      color: myColor(text3);
+    }
+    &:focus {
+      background-color: myColor(bg1);
+      color: myColor(text1);
+    }
   }
-
   button {
     float: right;
   }

@@ -5,6 +5,7 @@ $colors: (
 	"text3": #888,
 
 	"bg1": #202F34,
+  /*"bg1": #17a2b8,*/
 	"bg2": #1D3E48,
 
 );
@@ -71,7 +72,7 @@ $grays: map-merge((
 ), $grays);
 
 /*Why is this not being overridden???????????????*/
-$blue:    #f00;
+$blue:    #007bff !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
@@ -99,8 +100,9 @@ $colors: map-merge((
   "gray-dark":  $gray-800
 ), $colors);
 
-$primary:       #AD974F;
-$secondary:     #961C1C;
+/*$primary:       $blue !default;*/
+$primary:       $teal;
+$secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -290,7 +292,7 @@ $headings-margin-bottom:      ($spacer / 2) !default;
 $headings-font-family:        inherit !default;
 $headings-font-weight:        500 !default;
 $headings-line-height:        1.2 !default;
-$headings-color:              inherit !default;
+$headings-color:              $primary; /*rvb*/
 
 $display1-size:               6rem !default;
 $display2-size:               5.5rem !default;

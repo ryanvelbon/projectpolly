@@ -15,13 +15,18 @@
 <div class="container">
 	<section class="row post-a-sentence">
 		<div class="col-md-6 col-md-offset-3">
-			<header><h2>Write a sentence!</h2></header>
 			<!-- onsubmit="return validatePublishSentenceForm()" -->
 			<form name="publishSentenceForm" method="POST" action="/sentences">
 				<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="nativeLang" value="{{Auth::user()->profile->native_lang}}">
 				<div class="form-group">
-					<textarea class="form-control" name='new-sentence' id="new-sentence" rows="5" placeholder="write a sentence here"></textarea>
+					<textarea class="form-control" name='new-sentence' id="new-sentence"
+							 rows="5" placeholder="write a sentence here" spellcheck="false"></textarea>
+				</div>
+				<div id="char-count-div">
+					<span id="char-count">0</span>
+					<span>/</span>
+					<span id="char-max">255</span>
 				</div>
 				<button type="submit" id="publishSentenceBtn" class="btn btn-primary">Publish</button>
 				<input type="hidden" name="token" value="{{ Session::token() }}">
@@ -59,24 +64,6 @@
 @endsection
 
 @section('jsBottom')
-<script type="text/javascript">
-	function validatePublishSentenceForm() {
-		var nativeLang = document.forms["publishSentenceForm"]["nativeLang"].value;
-		if (nativeLang == "") {
-			return false;
-		}
-	}
-
-	$(document).on('click', '#publishSentenceBtn', function(e){
-		e.preventDefault();
-		var validated = validatePublishSentenceForm();
-		if(!validated){
-			$('#nativeLangModal').modal('show');
-		}
-	});
-</script>
-
-
+<script src="{{ asset('js/post-a-sentence.js') }}"></script>
 <script src="{{ asset('js/sentence.js') }}"></script>
-
 @endsection

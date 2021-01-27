@@ -9,8 +9,18 @@
         $user_likes = (bool) $row->is_like;  
       }
     ?>
-  	<strong>{{ $author->first_name }} {{ $author->last_name }}</strong>
-  	<small><em>{{ $author->username }}</em></small>
+  	<a href="profile/{{$author->username}}">
+      <strong>{{ $author->first_name }} {{ $author->last_name }}</strong>
+    	<small><em>{{ $author->username }}</em></small>
+    </a>
+    <span>.</span>
+    <small><time datetime="2021-01-26T11:25:23.000Z">
+    </time></small>
+    <small><a href="#" data-toggle="tooltip" data-placement="bottom"
+              title="{{ date('h:i A M d, Y', strtotime($sentence->created_at)) }}">
+      {{ date('M d', strtotime($sentence->created_at)) }}
+    </a></small>
+
     <img class="flag-icon" src="{{ asset('img/flags/svg/'.$langFlag.'.svg') }}">
   </div>
   <div class="body">
