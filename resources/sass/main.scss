@@ -33,7 +33,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
 .language-menu {
   display: flex;
   flex-wrap: wrap;
@@ -79,9 +78,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .flag-icon {
-    max-width: 5%;
+    max-width: 60px;
     height: auto;
     float: right;
+    margin-top: 5px;
   }
   
   .header {
@@ -112,9 +112,11 @@ h1, h2, h3, h4, h5, h6 {
       padding: 3px; /* makes focus area larger; easier to click */
       width: 20px;
       color: myColor(text3);
+      transition: all .2s ease-in-out;
 
       &:hover {
         color: myColor(text1);
+        transform: scale(1.9);
       }
     }
 

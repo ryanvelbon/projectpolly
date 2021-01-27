@@ -5,17 +5,22 @@
 @endsection
 
 @section('css')
-	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}"> -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 @endsection
 
 
 
 
 @section('content')
-<div class="container">
-	<section class="row post-a-sentence">
-		<div class="col-md-6 col-md-offset-3">
-			<!-- onsubmit="return validatePublishSentenceForm()" -->
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div id="col1" class="col-md-3">
+      a
+    </div>           
+    <div id="col2" class="col-md-4">
+		<section class="post-a-sentence">
 			<form name="publishSentenceForm" method="POST" action="/sentences">
 				<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 				<input type="hidden" name="nativeLang" value="{{Auth::user()->profile->native_lang}}">
@@ -28,20 +33,28 @@
 					<span>/</span>
 					<span id="char-max">255</span>
 				</div>
-				<button type="submit" id="publishSentenceBtn" class="btn btn-primary">Publish</button>
+				<button type="submit" id="publishSentenceBtn" class="btn btn-primary btn-lg">Publish</button>
 				<input type="hidden" name="token" value="{{ Session::token() }}">
 			</form>
-		</div>
-	</section>
-	<section class="row sentences">
-		<div class="col-md-6 col-md-offset-3">
-			<header><h2>Today's contributions</h2></header>
-			@foreach ($sentences as $sentence)
-				@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $sentence->user])
-			@endforeach
-		</div>
-	</section>
+		</section>
+		<section class="sentences">
+				<h2>Today's contributions</h2>
+				@foreach ($sentences as $sentence)
+					@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $sentence->user])
+				@endforeach
+		</section>
+    </div>
+    <div id="col3" class="col-md-5">
+      @include('includes.statistics', [])
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
 
 <div class="modal" id="nativeLangModal">
   <div class="modal-dialog">
