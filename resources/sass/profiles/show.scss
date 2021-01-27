@@ -7,11 +7,11 @@
 }
 .section-tab {
   padding: 10px;
+  &:hover {
+    background-color: gold;
+  }
 }
-.section-tab:hover {
-  background-color: gold;
-  /*display: block;*/
-}
+
 .section-pane {
   display: none;
   padding: 20px;

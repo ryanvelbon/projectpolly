@@ -1,0 +1,35 @@
+
+$colors: (
+	"text1": #FFF,
+	"text2": #EEE,
+	"text3": #888,
+
+	"bg1": #202F34,
+	"bg2": #1D3E48,
+
+);
+
+$weights: (
+	"regular": 400,
+	"medium": 500,
+	"bold": 700
+);
+
+@function myColor($color-name) {
+	@return map-get($colors, $color-name);
+}
+
+@function myWeight($weight-name) {
+	@return map-get($weights, $weight-name);
+}
+
+
+
+ /*--------temporarily use the colours below ------------
+
+  --text1: #000;
+  --text2: #333; post body
+  --text3: #666; icons, borders,
+
+  --bg1: #EEE;
+  --bg2: #FFF;*/

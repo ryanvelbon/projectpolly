@@ -1,0 +1,134 @@
+:root {
+  // these colours cannot be placed in _variables.scss because they will be compiled into hardcoded values in the css file. The browser requires these colors as variables.
+  --like:#5F5;
+  --dislike:#F66;
+}
+
+
+
+/*@import "./resets";*/
+@import 'variables';
+/*@import "./header"*/
+
+
+body {
+  background-color: myColor(bg1);
+}
+
+
+h2 {
+  color: myColor(text1);
+}
+
+
+
+
+.language-menu {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: DodgerBlue;
+
+  .optionContainer {
+    background-color: #f1f1f1;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 18px;
+    position: relative;
+
+    &:hover {
+      filter: grayscale(100%);
+    }
+
+    .optionTxt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+
+
+
+.sentence-post {
+  border-top: 1px solid myColor(text3);
+  border-bottom: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  &:hover {
+    background-color: myColor(bg2);
+    cursor: pointer;
+  }
+
+  .flag-icon {
+    max-width: 5%;
+    height: auto;
+    float: right;
+  }
+  
+  .header {
+    margin-top: 2px;
+
+    strong {
+      color: myColor(text1);
+    }
+
+    em {
+      color: myColor(text3);
+    }
+  }
+
+  .body {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    margin-right: 0px;
+    margin-left: 0px;
+    color: myColor(text2);
+  }
+
+  .footer {
+    margin-bottom: 15px;
+
+    i {
+      /*background-color: yellow;*/
+      padding: 3px; /* makes focus area larger; easier to click */
+      width: 20px;
+      color: myColor(text3);
+
+      &:hover {
+        color: myColor(text1);
+      }
+    }
+
+    i + i {
+      margin-right: 15%;
+    }
+  }
+}
+
+
+
+
+.post-a-sentence textarea{
+  background-color: myColor(bg1);
+
+  &::placeholder {
+    color: myColor(text3);
+  }
+
+  &:focus {
+    background-color: myColor(bg1);
+    color: myColor(text1);
+  }
+
+  button {
+    float: right;
+  }
+}
