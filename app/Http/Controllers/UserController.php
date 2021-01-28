@@ -7,6 +7,7 @@ use App\Models\Sentence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,7 +17,10 @@ class UserController extends Controller
 				->limit(10)
 				->get();
 
-		return view('dashboard', ['sentences' => $sentences]);
+		$lang_stats = DB::select('SELECT * FROM calc_lang_stats ORDER BY lang_id ASC');
+
+		return view('dashboard', ['sentences' => $sentences,
+								'lang_stats' => $lang_stats]);
 	}
 
 

@@ -1,4 +1,11 @@
 <h2>Top Contributors</h2>
+<?php
+	$results = \Illuminate\Support\Facades\DB::table('calc_top_contrib_stats')
+							->where('timeframe', '=', 'this week')
+							->orderByRAW('position ASC')
+							->limit(5)
+							->get();
+?>
 <table class="table table-hover table-dark">
   <thead>
     <tr>
@@ -10,24 +17,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>sexyboy92</td>
-      <td>392</td>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/es.svg') }}"></td>
-    </tr>
-	<tr>
-      <th scope="row">1</th>
-      <td>sexyboy92</td>
-      <td>392</td>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/es.svg') }}"></td>
-    </tr>
-	<tr>
-      <th scope="row">1</th>
-      <td>sexyboy92</td>
-      <td>392</td>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/es.svg') }}"></td>
-    </tr>    
+  	@foreach($results as $result)
+  		<?php 
+  			$user = \App\Models\User::find($result->user_id);
+  			$lang = \App\Models\Language::find($user->profile->native_lang);
+  			$flag = \App\Helpers\Flag::getFlagForLanguage($lang->code);
+  		?>
+	    <tr>
+	      <th scope="row">{{ $result->position }}</th>
+	      <td>{{ $user->username }}</td>
+	      <td>{{ $result->sentence_count }}</td>
+	      <td><img class="flag-icon" src="{{ asset('img/flags/svg/'.$flag.'.svg') }}"></td>
+	    </tr>   
+	@endforeach
   </tbody>
 </table>
 
@@ -44,26 +46,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/it.svg') }}"></td>
-      <td>Italian</td>
-      <td>15923</td>
-      <td>98</td>
-      <td>8258</td>
-    </tr>
-	<tr>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/it.svg') }}"></td>
-      <td>Italian</td>
-      <td>15923</td>
-      <td>98</td>
-      <td>8258</td>
-    </tr>
-    <tr>
-      <td><img class="flag-icon" src="{{ asset('img/flags/svg/it.svg') }}"></td>
-      <td>Italian</td>
-      <td>15923</td>
-      <td>98</td>
-      <td>8258</td>
-    </tr>
+  	@foreach($lang_stats as $item)
+  		<?php 
+  			$lang = \App\Models\Language::find($item->lang_id);
+  			$flag = \App\Helpers\Flag::getFlagForLanguage($lang->code);
+  		?>
+	    <tr>
+	      <td><img class="flag-icon" src="{{ asset('img/flags/svg/'.$flag.'.svg') }}"></td>
+	      <td>{{ $lang->title }}</td>
+	      <td>{{ $item->sentence_count }}</td>
+	      <td>{{ $item->native_speaker_count }}</td>
+	      <td>{{ $item->learner_count }}</td>
+	    </tr>
+	@endforeach
   </tbody>
 </table>
