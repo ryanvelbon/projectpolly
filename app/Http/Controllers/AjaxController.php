@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
-    public function updateFollowStatus(Request $request)
+    public function updateFollow(Request $request)
     {
     	$data = $request->all();
 
@@ -46,7 +46,7 @@ class AjaxController extends Controller
     							'isFollowing' => $isFollowing]);
     }
 
-    public function updateLikeSentenceStatus(Request $request)
+    public function updateLike(Request $request)
     {
         $data = $request->all();
 
@@ -87,7 +87,7 @@ class AjaxController extends Controller
                                 'reaction' => $reaction]);
     }
 
-    public function updateBookmarkSentenceStatus(Request $request)
+    public function updateBookmark(Request $request)
     {
         $data = $request->all();
 

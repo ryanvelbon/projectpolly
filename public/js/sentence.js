@@ -7,7 +7,7 @@ $(".like-btn, .dislike-btn").click(function(event) {
 
 	$.ajax({
 		type: "POST",
-		url: "/update-like-sentence-status",
+		url: "/update-like",
 		data: {
 			sentenceId: id,
 			isLike: $(event.target).attr('class').includes('thumbs-up'),
@@ -41,7 +41,7 @@ $(".fa-bookmark").click(function(event) {
 
 	$.ajax({
 		type: "POST",
-		url: "/update-bookmark-sentence-status",
+		url: "/update-bookmark",
 		data: {
 			sentenceId: id,
 			_token: $("#_token").val()

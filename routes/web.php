@@ -80,9 +80,9 @@ Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.ed
 Route::resource('profile', ProfileController::class)->only(['index', 'show', 'update'])->middleware('auth');
 
 
-Route::post('/update-follow-status', [AjaxController::class, 'updateFollowStatus']);
-Route::post('/update-like-sentence-status', [AjaxController::class, 'updateLikeSentenceStatus']);
-Route::post('/update-bookmark-sentence-status', [AjaxController::class, 'updateBookmarkSentenceStatus']);
+Route::post('/update-follow', [AjaxController::class, 'updateFollow']);
+Route::post('/update-like', [AjaxController::class, 'updateLike']);
+Route::post('/update-bookmark', [AjaxController::class, 'updateBookmark']);
 
 
 // Route::get('/dashboard', function () {

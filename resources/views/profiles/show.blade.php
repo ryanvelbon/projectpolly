@@ -100,7 +100,7 @@
 
 		$.ajax({
 			type: "POST",
-			url: "/update-follow-status",
+			url: "/update-follow",
 			data: {
 				id: $(this).val(),
 				_token: "{{ csrf_token() }}"
