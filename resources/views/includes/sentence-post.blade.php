@@ -28,28 +28,28 @@
   </div>
   <div class="footer">
   	<i id="like-btn-{{$sentence->id}}"
-        class="like-btn fas fa-thumbs-up"
-        data-sentence-id="{{ $sentence->id }}"
-        @if($row)
-          @if($user_likes)
-            style="color: var(--like)" 
-          @endif
-        @endif      
+        class="like-btn fas fa-thumbs-up 
+          @if($row)
+            @if($user_likes)
+              active
+            @endif
+          @endif 
+        "
+        data-sentence-id="{{ $sentence->id }}"     
     ></i>
 
   	<i id="dislike-btn-{{$sentence->id}}"
-        class="dislike-btn fas fa-thumbs-down"
-        data-sentence-id="{{ $sentence->id }}"
-        class="like-btn fas fa-thumbs-up"
-        data-sentence-id="{{ $sentence->id }}"
-        @if($row)
-          @if(!$user_likes)
-            style="color: var(--dislike)" 
+        class="dislike-btn fas fa-thumbs-down
+          @if($row)
+            @if(!$user_likes)
+              active
+            @endif
           @endif
-        @endif
+        "
+        data-sentence-id="{{ $sentence->id }}"
     ></i>
   	<i class="fas fa-heart"></i>
-  	<i class="fas fa-bookmark"></i>
+  	<i class="fas fa-bookmark" data-sentence-id="{{ $sentence->id }}"></i>
   	<i class="fas fa-share"></i>
   </div>
 </div>

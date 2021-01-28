@@ -17,7 +17,7 @@
 <div class="container-fluid">
   <div class="row">
     <div id="col1" class="col-md-3">
-      a
+      @include('includes.test2')
     </div>           
     <div id="col2" class="col-md-4">
 		<section class="post-a-sentence">

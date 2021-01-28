@@ -1,13 +1,5 @@
 
-
-
-
-
-
-
 $(".like-btn, .dislike-btn").click(function(event) {
-
-	// $(this).css("color", "yellow");
 
 	event.preventDefault();
 
@@ -22,27 +14,48 @@ $(".like-btn, .dislike-btn").click(function(event) {
 			_token: $("#_token").val()
 		},
 		success: function(response) {
-
 			// deactivate both icons
-			$('#like-btn-'+id).css("color", "var(--text3)");
-			$('#dislike-btn-'+id).css("color", "var(--text3)");
+			$('#like-btn-'+id).removeClass("active");
+			$('#dislike-btn-'+id).removeClass("active");
 
 			switch(response['reaction']) {
 				case 'neither':
 					// do nothing
 					break;
 				case 'like':
-					$('#like-btn-'+id).css("color", "var(--like)");
+					$(event.target).addClass("active");
 					break;
 				case 'dislike':
-					$('#dislike-btn-'+id).css("color", "var(--dislike)");
+					$(event.target).addClass("active");
 					break;
-					
 			}
 		},
 		error: function(response) {
-			// console.log(response);
 			alert("error");
+		}
+	});
+});
+
+$(".fa-bookmark").click(function(event) {
+	id =$(this).data("sentence-id");
+
+	$.ajax({
+		type: "POST",
+		url: "/update-bookmark-sentence-status",
+		data: {
+			sentenceId: id,
+			_token: $("#_token").val()
+		},
+		success: function(response) {
+			if(response['isBookmarked']) {
+				$(event.target).addClass("active");
+			}else {
+				$(event.target).removeClass("active");
+			}
+			console.log(response);
+		},
+		error: function(response) {
+			console.log(response);
 		}
 	});
 });

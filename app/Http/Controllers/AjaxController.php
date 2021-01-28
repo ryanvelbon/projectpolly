@@ -86,4 +86,35 @@ class AjaxController extends Controller
         return response()->json(['success' => 'Record inserted.',
                                 'reaction' => $reaction]);
     }
+
+    public function updateBookmarkSentenceStatus(Request $request)
+    {
+        $data = $request->all();
+
+        $user_id = Auth::id();
+        $sentence_id = $data['sentenceId'];
+
+        $row = DB::table('bookmarks')->where([
+            ['user_id', '=', $user_id],
+            ['sentence_id', '=', $sentence_id],
+        ])->first();
+
+        if($row) {
+            DB::table('bookmarks')->where([
+                ['user_id', '=', $user_id],
+                ['sentence_id', '=', $sentence_id],
+            ])->delete();
+
+            return response()->json(['success' => 'Record deleted.',
+                                    'isBookmarked' => false]);
+        }else {
+            DB::table('bookmarks')->insert([
+                'user_id' => $user_id,
+                'sentence_id' => $sentence_id
+            ]);
+
+            return response()->json(['success' => 'Record inserted.',
+                                    'isBookmarked' => true]);
+        }
+    }
 }

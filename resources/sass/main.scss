@@ -1,8 +1,6 @@
 :root {
   // these colours cannot be placed in _variables.scss because they will be compiled into hardcoded values in the css file. The browser requires these colors as variables.
   --text3:#888;
-  --like:#5F5;
-  --dislike:#F66;
 }
 
 
@@ -123,9 +121,20 @@ h1, h2, h3, h4, h5, h6 {
     i + i {
       margin-right: 15%;
     }
+
+    .fa-thumbs-up.active {
+      color: #5F5;
+    }
+
+    .fa-thumbs-down.active {
+      color: #F66;
+    }
+
+    .fa-bookmark.active {
+      color: blue;
+    }
   }
 }
-
 
 
 

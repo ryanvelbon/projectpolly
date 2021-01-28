@@ -82,7 +82,7 @@ Route::resource('profile', ProfileController::class)->only(['index', 'show', 'up
 
 Route::post('/update-follow-status', [AjaxController::class, 'updateFollowStatus']);
 Route::post('/update-like-sentence-status', [AjaxController::class, 'updateLikeSentenceStatus']);
-
+Route::post('/update-bookmark-sentence-status', [AjaxController::class, 'updateBookmarkSentenceStatus']);
 
 
 // Route::get('/dashboard', function () {
