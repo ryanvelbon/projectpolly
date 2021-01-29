@@ -22,6 +22,15 @@ class User extends Model implements Authenticatable
     	return $this->hasMany('App\Models\Sentence');
     }
 
+    public function getBookmarksAttribute()
+    {
+        // this is an Accessor Function
+        // allows us to do $myUser->bookmarks
+
+        
+        
+    }
+
     public function getFollowersAttribute()
     {
         // this is an Accessor Function

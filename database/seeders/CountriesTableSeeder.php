@@ -11,8 +11,8 @@ class CountriesTableSeeder extends Seeder
     {
 	 	$array = array(
     		"de" => "Germany",
-    		"gb" => "English",
-    		"es" => "Spanish",
+    		"gb" => "UK",
+    		"es" => "Spain",
     		"mt" => "Malta",
     		"it" => "Italy",
     	);
