@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Sentence;
+
 class User extends Model implements Authenticatable
 {
     use HasFactory;
@@ -27,7 +29,16 @@ class User extends Model implements Authenticatable
         // this is an Accessor Function
         // allows us to do $myUser->bookmarks
 
-        
+        $results = DB::select('SELECT * FROM bookmarks WHERE user_id = ?', [$this->id]);
+
+        $sentences = array();
+
+        foreach($results as $result){
+            $sentence = Sentence::where('id', $result->sentence_id)->first();
+            array_push($sentences, $sentence);
+        }
+
+        return $sentences;
         
     }
 
