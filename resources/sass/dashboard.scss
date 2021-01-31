@@ -19,6 +19,13 @@
 
 table {
 	text-align: center;
+
+	tr:hover {
+		/*font-size: 105%;
+		font-weight: bold;
+		transition: font-size 300ms linear;
+		transition: font-weight 300ms linear;*/
+	}
 }
 
 .flag-icon {

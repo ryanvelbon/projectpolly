@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Sentence;
+use App\Models\Following;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -87,6 +89,11 @@ class UserController extends Controller
 	{
 		if (Auth::attempt(['email' => $request['email'],
 				'password' => $request['password']])) {
+			$following_ids = Following::where('follower', Auth::id())->get()->pluck('followed')->toArray();
+			Session::push('following_ids', $following_ids);
+			// $follower_ids = Following::where('followed', Auth::id())->get()->pluck('follower')->toArray();
+			// Session::push('follower_ids', $follower_ids);
+			// $following_ids = [2,3,5,7,11, 37, 55]; // for testing
 			return redirect()->route('dashboard');
 		}
 		return redirect()->back()->withErrors(['Incorrect email or password.']);

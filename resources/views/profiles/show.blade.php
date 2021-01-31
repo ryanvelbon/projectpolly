@@ -16,7 +16,7 @@
 	<h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
 	<p>{{ $user->username }}</p>
 
-	<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}">Follow</button>
+	<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}"><span>Follow</span></button>
 
 
 
@@ -30,7 +30,29 @@
 			<a data-id="following" class="section-tab">Following</a>
 		</nav>
 		<main>
-			<div id="overview" class="section-pane active">Overview</div>
+			<div id="overview" class="section-pane active">
+				<table class="table table-hover table-dark">
+					<tr>
+						<th>Native Language</th>
+						<td>{{ $profile->language }}</td>
+					</tr>
+					<tr>
+						<th>Age</th>
+						<td>{{ $profile->age }}
+							@if($profile->gender == 'm')
+								<i class="fas fa-male"></i>
+							@elseif($profile->gender == 'f')
+								<i class="fas fa-female"></i>
+							@else
+							@endif
+						</td>
+					</tr>
+					<tr>
+						<th>Member since</th>
+						<td>{{ date('M d, Y', strtotime($profile->member_since)) }}</td>
+					</tr>
+				</table>
+			</div>
 			<!-- SENTENCES-------------------------------------------------------------------------->
 			<div id="sentences" class="section-pane">
 				@if(count($user->sentences))
@@ -46,11 +68,7 @@
 				<ul>
 					@if(count($user->followers))
 						@foreach ($user->followers as $follower)
-							<li>
-								<a href="/profile/{{$follower->username}}">
-									{{ $follower->username }}
-								</a>
-							</li>
+							@include('includes.member-card', ['member' => $follower])
 						@endforeach
 					@else
 						<p>No followers yet.</p>
@@ -62,11 +80,7 @@
 				<ul>
 					@if(count($user->following))
 						@foreach ($user->following as $user_being_followed)
-							<li>
-								<a href="/profile/{{$user_being_followed->username}}">
-									{{ $user_being_followed->username }}								
-								</a>
-							</li>
+							@include('includes.member-card', ['member' => $user_being_followed])
 						@endforeach
 					@else
 						<p>No followers yet.</p>
@@ -98,6 +112,8 @@
 
 		event.preventDefault();
 
+		var btn = this;
+
 		$.ajax({
 			type: "POST",
 			url: "/update-follow",
@@ -108,9 +124,11 @@
 			success: function(response) {
 				console.log(response);
 				if(response['isFollowing']){
-					// make button responsiveness : make button reflect the new state
+					$(btn).removeClass("btn-outline-primary not-following");
+					$(btn).addClass("btn-primary following");
 				}else{
-					// same
+					$(btn).removeClass("btn-primary following");
+					$(btn).addClass("btn-outline-primary not-following");
 				}
 			},
 			error: function(response) {

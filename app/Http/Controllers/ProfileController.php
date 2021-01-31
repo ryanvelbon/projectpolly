@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 
@@ -12,14 +13,18 @@ class ProfileController extends Controller
     public function index()
     {
         return view('profiles.show', [
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'profile' => DB::table('view_profiles_records')->where('id', Auth::id())->first()
         ]);
     }
 
     public function show($username)
     {
+        $user = User::where('username', $username)->first();
+
         return view('profiles.show', [
-            'user' => User::where('username', $username)->first()
+            'user' => $user,
+            'profile' => DB::table('view_profiles_records')->where('id', $user->id)->first()
         ]);
     }
 

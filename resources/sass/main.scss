@@ -30,6 +30,29 @@ h1, h2, h3, h4, h5, h6 {
   /*color: myColor(text1);*/
 }
 
+.btn {
+  font-weight: bold;
+  border-radius: 15px;
+  margin: 5px; /*Remove. Vertical central align instead*/
+}
+
+.follow-btn.not-following {
+  width: 105px;
+}
+.follow-btn.following {
+  width: 105px;
+  &:before {content: "Following"}
+  &:hover {
+    background-color: #AA0000;
+    border: 0px;
+    transition: background-color 200ms linear;
+    &:before{
+      content: "Unfollow";
+    }
+  }
+  span {display: none}  
+}
+
 
 .language-menu {
   display: flex;
@@ -152,6 +175,32 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
   button {
+    float: right;
+  }
+}
+
+.members-container {
+  background-color: yellow;
+}
+
+.member-card {
+
+  min-width: 400px;
+
+  /*width: 40%;*/
+
+  background-color: pink;
+  margin-bottom: 5px;
+
+  .profile-img {
+    width: 70px;
+  }
+
+  .flag-icon {
+    width: 30px;
+  }
+
+  .follow-btn {
     float: right;
   }
 }
