@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
+use App\Models\Profile;
 
 class ProfileController extends Controller
 {
@@ -37,6 +38,17 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::find($id);
+
+        $profile->gender = $request['gender'];
+        $profile->native_lang = $request['native-lang'];
+        $profile->nationality = $request['nationality'];
+        $profile->dob = $request['yyyy'] . "-" .
+                $request['mm'] . "-" .
+                $request['dd'];
+        $profile->bio = $request['bio'];
+
+        $profile->save();
+        return "success";
     }
 }

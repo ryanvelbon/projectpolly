@@ -278,84 +278,136 @@ h1, h2, h3, h4, h5, h6 {
 
 /*----profile-setup-form---------------START-----------------------------------------------------------------------------------------------------------*/
 
+
+
+/*.modal {
+  background-color: #f44;
+}
+.modal-dialog {
+  background-color: #44f;
+}
+.modal-content {
+  background-color: #4f4;
+}
+.modal-header {
+  background-color: #0f2;
+}
+.modal-title {
+  background-color: #62f;
+}
+.modal-body {
+  background-color: #0ff;
+}
+.modal-footer {
+  background-color: #0f0;
+}
+.tab {
+  background-color: blue;
+}
+.steps {
+  background-color: yellow;
+}*/
+
+
+
+
 #profileSetupModal {
+
   .modal-content {
     width: 500px;
-    height: 800px;
+    height: 650px;
+  }
+
+  .modal-header {
+    padding: 0px;
+    position: relative;
+
+    .modal-title {
+      padding:10px 5px 5px 20px;
+    }
+
+    button.close {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: 5px;
+      font-size: 30px;
+      color: #C0C0C0;
+    }
+  }
+
+  .modal-body {
+    position: relative;
+    padding: 0px;
+
+    .tab {
+      display: none; /* Hide all steps by default: */
+
+      box-sizing: border-box;
+      padding: 10px 10px 30px 10px;
+
+      text-align: center;
+
+    }
+
+    .steps {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  h1 {
+    text-align: center;  
+  }
+
+  input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    border: 1px solid #aaaaaa;
+  }
+
+  /* Mark input boxes that gets an error on validation: */
+  input.invalid {
+    background-color: #ffdddd;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+
+  button:hover {
+    /*opacity: 0.8;*/
+  }
+
+  /* Make circles that indicate the steps of the form: */
+  .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #C0C0C0;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .step.active {
+    opacity: 0.5;
+    background-color: $primary;
+  }
+
+  /* Mark the steps that are finished and valid: */
+  .step.finish {
+    opacity: 1;
+    background-color: $primary;
   }
 }
 
-#profile-setup-form {
-
-    /*background-color: #f30;*/
-    width: 100%;
-    min-width: 300px;
-    height: 100%;
-/*    position: relative;
-    background-color: red;*/
-
-/*    .bottom-section {
-      background-color: blue;
-      position: absolute;
-      bottom: 0;
-    }*/
-
-    h1 {
-      text-align: center;  
-    }
-
-    input {
-      padding: 10px;
-      width: 100%;
-      font-size: 17px;
-      border: 1px solid #aaaaaa;
-    }
-
-    /* Mark input boxes that gets an error on validation: */
-    input.invalid {
-      background-color: #ffdddd;
-    }
-
-    /* Hide all steps by default: */
-    .tab {
-      display: none;
-    }
-
-    button {
-      margin-top: 20px;
-    }
-
-    button:hover {
-      /*opacity: 0.8;*/
-    }
-
-    /* Make circles that indicate the steps of the form: */
-    .step {
-      height: 15px;
-      width: 15px;
-      margin: 0 2px;
-      background-color: #C0C0C0;
-      border: none;  
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .step.active {
-      opacity: 0.5;
-      background-color: $primary;
-    }
-
-    /* Mark the steps that are finished and valid: */
-    .step.finish {
-      opacity: 1;
-      background-color: $primary;
-    }
-}
-
-.gender-menu {
-  /*div {
-    display: inline-block;
-  }*/
+#genderStep {
 
   .gender-choice {
     display: inline-block;
@@ -395,10 +447,55 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+#bdayStep {
 
-/*----profile-setup-form--------------------------------------------------------------
---------------------------------------------------------
------------------------------
--------------
---END
+/*  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
 */
+/*  text-align: center;
+  justify-content: center;
+
+  select {
+    width: 30%;
+    float: left;
+    margin: 3px;
+  }*/
+
+}
+
+
+
+
+/*
+
+UNCOMMENT THIS FOR TESTING
+
+div {
+  background-color: red;
+  div {
+    background-color: blue;
+    div {
+      background-color: green;
+      div {
+        background-color: grey;
+        div {
+          background-color: yellow;
+          div {
+            background-color: pink;
+          }
+        }
+      }
+    }
+  }
+}*/
+
+
+
+
+
+
+
+
+
