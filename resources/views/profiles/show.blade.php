@@ -16,7 +16,12 @@
 	<h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
 	<p>{{ $user->username }}</p>
 
-	<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}"><span>Follow</span></button>
+	
+	@if( $user->id == Auth::id() )
+		<button type="button" class="btn btn-outline-primary">Edit Profile</button>
+	@else
+		<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}"><span>Follow</span></button>
+	@endif
 
 
 
@@ -26,8 +31,14 @@
 		<nav class="profile-nav">
 			<a data-id="overview" class="section-tab active">Overview</a>
 			<a data-id="sentences" class="section-tab">Sentences</a>
+			@if( $user->id == Auth::id() )
+				<a data-id="bookmarks" class="section-tab">Bookmarks</a>
+			@endif
 			<a data-id="followers" class="section-tab">Followers</a>
 			<a data-id="following" class="section-tab">Following</a>
+			<a data-id="tags" class="section-tab">Tags</a>
+			<a data-id="badges" class="section-tab">Badges</a>
+
 		</nav>
 		<main>
 			<div id="overview" class="section-pane active">
@@ -61,6 +72,18 @@
 					@endforeach
 				@else
 					<p>No sentences published yet.</p>
+				@endif
+			</div>
+			<!-- BOOKMARKS------------------------------------------------------------------------------>
+			<div id="bookmarks" class="section-pane">
+				@if($user->id == Auth::id())
+					@if(count($user->bookmarks))
+						@foreach ($user->bookmarks as $bookmark)
+							@include('includes.sentence-summary', ['sentence' => $bookmark])
+						@endforeach
+					@else
+						<p>This is where your bookmarked sentences will appear.</p>
+					@endif
 				@endif
 			</div>
 			<!-- FOLLOWERS------------------------------------------------------------------------------>
@@ -137,5 +160,7 @@
 		});
 	});
 </script>
+
+<script src="{{ asset('js/sentence.js') }}"></script>
 
 @endsection

@@ -9,7 +9,7 @@ $(document).on('click', '#publishSentenceBtn', function(e){
 	e.preventDefault();
 	var validated = validatePublishSentenceForm();
 	if(!validated){
-		$('#nativeLangModal').modal('show');
+		$('#profileSetupModal').modal('show');
 	}
 });
 

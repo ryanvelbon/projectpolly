@@ -56,15 +56,16 @@
 
 
 
-<div class="modal" id="nativeLangModal">
+<div class="modal" id="profileSetupModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">Set up profile</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
         Cannot publish sentence. Complete your profile.
+        @include('includes.profile-setup', ['languages' => $languages])
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -79,4 +80,5 @@
 @section('jsBottom')
 <script src="{{ asset('js/post-a-sentence.js') }}"></script>
 <script src="{{ asset('js/sentence.js') }}"></script>
+<script src="{{ asset('js/profile-setup.js') }}"></script>
 @endsection

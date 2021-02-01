@@ -55,28 +55,48 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .language-menu {
+  box-sizing: border-box;
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  background-color: DodgerBlue;
+  text-align: center;
+  justify-content: center;
 
-  .optionContainer {
-    background-color: #f1f1f1;
+  .lang-choice {
+    filter: grayscale(50%);
+    opacity: 0.8;
     width: 100px;
-    margin: 10px;
-    text-align: center;
-    line-height: 75px;
+    margin: 2px;
+    margin-bottom: 10px;
+    /*line-height: 75px;*/
     font-size: 18px;
-    position: relative;
+    /*position: relative;*/
 
     &:hover {
-      filter: grayscale(100%);
+      filter: grayscale(30%);
+      opacity: 1;
+      cursor: pointer;
     }
 
-    .optionTxt {
+    &.active {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+/*    .optionTxt {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }*/
+    .lang-flag {
+      width: 80%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .lang-title {
+      display: block;
+      font-size: 15px;
+      font-weight: bold;
     }
   }
 }
@@ -159,6 +179,57 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.sentence-summary {
+
+  height: 80px;
+  background-color: yellow;
+  margin-bottom: 10px;
+  
+  box-sizing: border-box;
+  display: grid;
+  grid: 100% / auto auto auto;
+  grid-template-columns: 40px 40px 40px 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-auto-rows: 40px;
+
+  div {
+    display: inline-block;
+  }
+  .stat {
+    width: 40px;
+    text-align: center;
+    /**/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      display: block;
+      font-size: 10px;
+      padding-top: 8px;
+    }
+
+    &.bookmarked {
+      background-color: red;
+    }
+    &.upvotes {
+      background-color: blue;
+    }
+    &.stat.downvotes {
+      background-color: pink;
+    }
+  }
+  .main {
+    background-color: green;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 
 
 .post-a-sentence {
@@ -204,3 +275,130 @@ h1, h2, h3, h4, h5, h6 {
     float: right;
   }
 }
+
+/*----profile-setup-form---------------START-----------------------------------------------------------------------------------------------------------*/
+
+#profileSetupModal {
+  .modal-content {
+    width: 500px;
+    height: 800px;
+  }
+}
+
+#profile-setup-form {
+
+    /*background-color: #f30;*/
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+/*    position: relative;
+    background-color: red;*/
+
+/*    .bottom-section {
+      background-color: blue;
+      position: absolute;
+      bottom: 0;
+    }*/
+
+    h1 {
+      text-align: center;  
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      font-size: 17px;
+      border: 1px solid #aaaaaa;
+    }
+
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+      background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+      display: none;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+
+    button:hover {
+      /*opacity: 0.8;*/
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #C0C0C0;
+      border: none;  
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .step.active {
+      opacity: 0.5;
+      background-color: $primary;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+      opacity: 1;
+      background-color: $primary;
+    }
+}
+
+.gender-menu {
+  /*div {
+    display: inline-block;
+  }*/
+
+  .gender-choice {
+    display: inline-block;
+
+    width: 40%;
+    text-align: center;
+
+    i {
+      font-size: 200px;
+      margin: 30px;
+      opacity: 0.3;
+
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    span {
+      display: block;
+    }
+
+    &.male i {
+      color: myColor(male2);
+    }
+      
+
+    &.female i {
+      color: myColor(female2);
+    }
+
+    &.active {
+      i {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+/*----profile-setup-form--------------------------------------------------------------
+--------------------------------------------------------
+-----------------------------
+-------------
+--END
+*/

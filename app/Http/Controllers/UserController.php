@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Sentence;
 use App\Models\Following;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,15 @@ class UserController extends Controller
 				->limit(10)
 				->get();
 
+		$languages = Language::where('ranking', '<=', 15)->get();
+
+		$countries = DB::select('SELECT * FROM countries');
+
 		$lang_stats = DB::select('SELECT * FROM calc_lang_stats ORDER BY lang_id ASC');
 
 		return view('dashboard', ['sentences' => $sentences,
+								'languages' => $languages,
+								'countries' => $countries,
 								'lang_stats' => $lang_stats]);
 	}
 
