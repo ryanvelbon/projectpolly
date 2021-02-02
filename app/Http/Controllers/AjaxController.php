@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AjaxController extends Controller
 {
@@ -14,7 +15,10 @@ class AjaxController extends Controller
     	$data = $request->all();
 
     	$follower = Auth::id();
-    	$followed = $data['id'];
+    	$followed = (int) $data['id'];
+
+        $session_array = Session::get('following_ids');
+
 
     	$row = DB::table('followings')->where([
     		['follower', '=', $follower],
@@ -22,14 +26,18 @@ class AjaxController extends Controller
     	])->first();
 
     	if($row){
-    		// if row exists then user is requesting "unfollow"
-    		
+    		// if row exists then user is requesting "unfollow"    		
+
     		DB::table('followings')->where([
 	    		['follower', '=', $follower],
 	    		['followed', '=', $followed],
 	    	])->delete();
 
 	    	$isFollowing = false;
+
+            // remove from session variable
+            $session_array = array_diff($session_array, array($followed));
+
     	}
     	else{
     		// else user is requesting "follow"
@@ -40,7 +48,16 @@ class AjaxController extends Controller
     		]);
 
     		$isFollowing = true;
+
+            // add to session variable
+            array_push($session_array, $followed);
+
     	}
+
+        Session::put('following_ids', $session_array); // update session
+        Session::save();
+
+        // return "Clicked on user " . $followed . " ----- " . var_dump($session_array); // uncomment for testing
 
     	return response()->json(['success' => 'Ajax request submitted successfully',
     							'isFollowing' => $isFollowing]);

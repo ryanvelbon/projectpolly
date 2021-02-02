@@ -106,7 +106,7 @@
 							@include('includes.member-card', ['member' => $user_being_followed])
 						@endforeach
 					@else
-						<p>No followers yet.</p>
+						<p>Not following anyone yet.</p>
 					@endif
 				</ul>
 			</div>

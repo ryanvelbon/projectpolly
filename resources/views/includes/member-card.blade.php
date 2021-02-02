@@ -2,7 +2,7 @@
 	<div class="member-card">
 
 		<?php
-			$following_ids = Session::get('following_ids')[0]; // the array object is stored in the first cell, hence [0]
+			$following_ids = Session::get('following_ids');
 		?>
 
 		<img class="profile-img" src="{{ asset('img/profile-pics/default.png') }}">

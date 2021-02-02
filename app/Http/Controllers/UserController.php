@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+	private function setSessions()
+	{
+			$following_ids = Following::where('follower', Auth::id())->get()->pluck('followed')->toArray();
+			Session::put('following_ids', $following_ids);
+			// $follower_ids = Following::where('followed', Auth::id())->get()->pluck('follower')->toArray();
+			// Session::put('follower_ids', $follower_ids);
+        	Session::save();
+	}
+
 	public function getDashboard()
 	{
 		$sentences = Sentence::orderByDesc('created_at')
@@ -89,6 +98,8 @@ class UserController extends Controller
 		$profile->user_id = Auth::id();
 		$profile->save();
 
+		$this->setSessions();
+
 		return redirect()->route('dashboard');
 	}
 
@@ -96,11 +107,9 @@ class UserController extends Controller
 	{
 		if (Auth::attempt(['email' => $request['email'],
 				'password' => $request['password']])) {
-			$following_ids = Following::where('follower', Auth::id())->get()->pluck('followed')->toArray();
-			Session::push('following_ids', $following_ids);
-			// $follower_ids = Following::where('followed', Auth::id())->get()->pluck('follower')->toArray();
-			// Session::push('follower_ids', $follower_ids);
-			// $following_ids = [2,3,5,7,11, 37, 55]; // for testing
+
+			$this->setSessions();
+
 			return redirect()->route('dashboard');
 		}
 		return redirect()->back()->withErrors(['Incorrect email or password.']);
