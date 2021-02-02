@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Sentence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SentenceController extends Controller
 {
@@ -62,5 +63,33 @@ class SentenceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /*
+     *  Load n more sentences starting from index i of session variable feed_sentence_ids
+     */
+    public function fetchNextSentences(Request $request)
+    {
+        $data = $request->all();
+
+        $i = Session::get('feed_sentence_ids_pointer');
+        $n = $data['n'];
+
+        $ids = Session::get('feed_sentence_ids');
+
+        $sentences = [];
+
+        for($x=$i; $x<$i+$n; $x++){
+            $id = $ids[$x];
+            $sentence = Sentence::find($id);
+            array_push($sentences, $sentence);            
+        }
+
+        $new_pointer = $i + $n;
+
+        Session::put('feed_sentence_ids_pointer', $new_pointer);
+
+        return json_encode($sentences);
+        // return $i;
     }
 }

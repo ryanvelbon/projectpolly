@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .flag-icon {
-    max-width: 60px;
+    max-width: 20px;
     height: auto;
     float: right;
     margin-top: 5px;
@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .fa-bookmark.active {
-      color: blue;
+      color: gold;
     }
   }
 }
@@ -232,11 +232,19 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-.post-a-sentence {
+#publish-sentence {
+
+  $maxH: 200px; /* outermost div height */
+
+  margin-bottom: 60px;
+
+  /*background-color: #2f2;*/
+  height: $maxH * 1;
+
   textarea {
     background-color: myColor(bg1);
     font-size: 50px;
-    height: 200px;
+    height: $maxH * 0.8;
     &::placeholder {
       color: myColor(text3);
     }
@@ -247,6 +255,22 @@ h1, h2, h3, h4, h5, h6 {
   }
   button {
     float: right;
+  }
+}
+
+#char-count-div {
+  /*background-color: #ccf;*/
+  width: 100px;
+  float: left;
+  margin-left: 10px;
+}
+
+#top-contributors-table,
+#popular-languages-table {
+  text-align: center;
+
+  .flag-icon {
+    width: 30px;
   }
 }
 
@@ -491,11 +515,11 @@ div {
   }
 }*/
 
-
-
-
-
-
+.spinner {
+  font-size: 30px;
+  margin-top: 20px;
+  display: none;
+}
 
 
 

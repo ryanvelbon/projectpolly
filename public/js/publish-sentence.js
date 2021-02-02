@@ -1,14 +1,20 @@
-function validatePublishSentenceForm() {
+function userIsAuthorizedToPublish() {
 	var nativeLang = document.forms["publishSentenceForm"]["nativeLang"].value;
+	alert(nativeLang);
 	if (nativeLang == "") {
 		return false;
+	}else {
+		return true;
 	}
 }
 
 $(document).on('click', '#publishSentenceBtn', function(e){
-	e.preventDefault();
-	var validated = validatePublishSentenceForm();
-	if(!validated){
+	if(userIsAuthorizedToPublish()){
+		alert("Indeed you can publish");
+		$("#publishSentenceForm").submit();
+	}else{
+		alert("Cannot");
+		e.preventDefault();
 		$('#profileSetupModal').modal('show');
 	}
 });

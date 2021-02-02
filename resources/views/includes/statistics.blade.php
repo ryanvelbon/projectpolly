@@ -6,7 +6,7 @@
 							->limit(5)
 							->get();
 ?>
-<table class="table table-hover table-dark">
+<table id="top-contributors-table" class="table table-hover table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -36,7 +36,7 @@
 
 
 <h2>Popular Languages</h2>
-<table class="table table-hover table-dark">
+<table id="popular-languages-table" class="table table-hover table-dark">
   <thead>
     <tr>
       <th colspan="2">Language</th>

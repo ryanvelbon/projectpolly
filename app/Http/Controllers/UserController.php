@@ -19,8 +19,11 @@ class UserController extends Controller
 	{
 			$following_ids = Following::where('follower', Auth::id())->get()->pluck('followed')->toArray();
 			$bookmark_ids = Bookmark::where('user_id', Auth::id())->get()->pluck('sentence_id')->toArray();
+			$feed_sentence_ids = Sentence::orderByDesc('created_at')->limit(1000)->get()->pluck('id')->toArray();
 			Session::put('following_ids', $following_ids);
 			Session::put('bookmark_ids', $bookmark_ids);
+			Session::put('feed_sentence_ids', $feed_sentence_ids);
+			Session::put('feed_sentence_ids_pointer', 0); // always start from the first item in the feed_sentence_ids array
 			// $follower_ids = Following::where('followed', Auth::id())->get()->pluck('follower')->toArray();
 			// Session::put('follower_ids', $follower_ids);
         	Session::save();
