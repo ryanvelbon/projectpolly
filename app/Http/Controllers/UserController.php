@@ -6,6 +6,7 @@ use App\Models\Profile;
 use App\Models\Sentence;
 use App\Models\Following;
 use App\Models\Language;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,9 @@ class UserController extends Controller
 	private function setSessions()
 	{
 			$following_ids = Following::where('follower', Auth::id())->get()->pluck('followed')->toArray();
+			$bookmark_ids = Bookmark::where('user_id', Auth::id())->get()->pluck('sentence_id')->toArray();
 			Session::put('following_ids', $following_ids);
+			Session::put('bookmark_ids', $bookmark_ids);
 			// $follower_ids = Following::where('followed', Auth::id())->get()->pluck('follower')->toArray();
 			// Session::put('follower_ids', $follower_ids);
         	Session::save();

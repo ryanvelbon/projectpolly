@@ -104,12 +104,19 @@ class AjaxController extends Controller
                                 'reaction' => $reaction]);
     }
 
+    /*
+     *  This function is essentially exactly the same as updateFollow
+     *  Find a DRY solution.
+     *
+     */
     public function updateBookmark(Request $request)
     {
         $data = $request->all();
 
         $user_id = Auth::id();
-        $sentence_id = $data['sentenceId'];
+        $sentence_id = (int) $data['sentenceId'];
+
+        $session_array = Session::get('bookmark_ids');
 
         $row = DB::table('bookmarks')->where([
             ['user_id', '=', $user_id],
@@ -117,21 +124,35 @@ class AjaxController extends Controller
         ])->first();
 
         if($row) {
+            // if row exists then user is requesting "remove this sentence from bookmarks"
             DB::table('bookmarks')->where([
                 ['user_id', '=', $user_id],
                 ['sentence_id', '=', $sentence_id],
             ])->delete();
 
-            return response()->json(['success' => 'Record deleted.',
-                                    'isBookmarked' => false]);
+            $isBookmarked = false;
+
+            // remove from session variable
+            $session_array = array_diff($session_array, array($sentence_id));
+            
         }else {
+            // else user is requesting "bookmark this sentence"
             DB::table('bookmarks')->insert([
                 'user_id' => $user_id,
                 'sentence_id' => $sentence_id
             ]);
 
-            return response()->json(['success' => 'Record inserted.',
-                                    'isBookmarked' => true]);
+            $isBookmarked = true;
+
+            // add to session variable
+            array_push($session_array, $sentence_id);
+            
         }
+
+        Session::put('bookmark_ids', $session_array);
+        Session::save();
+
+        return response()->json(['success' => 'Record updated.',
+                                    'isBookmarked' => $isBookmarked]);
     }
 }

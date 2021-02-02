@@ -2,8 +2,15 @@
   <div class="header">
     <?php 
 
+      $bookmark_ids = Session::get('bookmark_ids');
+
       $langFlag = \App\Helpers\Flag::getFlagForLanguage($sentence->lang->code);
       $row = $sentence->likes->where('user_id', '=', Auth::id())->first();
+
+      /* Which is more optimal for loading current user's like/dislike and bookmark info per sentence:
+            1. using session variables; or
+            2. querying the datavase
+       */
 
       if($row){
         $user_likes = (bool) $row->is_like;  
@@ -49,7 +56,12 @@
         data-sentence-id="{{ $sentence->id }}"
     ></i>
   	<i class="fas fa-heart"></i>
-  	<i class="fas fa-bookmark" data-sentence-id="{{ $sentence->id }}"></i>
+  	<i class="fas fa-bookmark
+      @if(in_array($sentence->id, $bookmark_ids))
+        active
+      @endif
+      " 
+      data-sentence-id="{{ $sentence->id }}"></i>
   	<i class="fas fa-share"></i>
   </div>
 </div>
