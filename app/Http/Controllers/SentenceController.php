@@ -89,7 +89,16 @@ class SentenceController extends Controller
 
         Session::put('feed_sentence_ids_pointer', $new_pointer);
 
-        return json_encode($sentences);
+        // return json_encode($sentences);
         // return $i;
+
+        $html = "";
+
+        foreach($sentences as $sentence){
+            $html .= view('includes.sentence-post', ['sentence' => $sentence])->render();
+        }
+
+        return $html;
+        
     }
 }

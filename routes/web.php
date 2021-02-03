@@ -29,7 +29,6 @@ Route::get('/test', function() {
 });
 
 
-
 Route::get('/', function () {
     return view('home');
 });
@@ -97,4 +96,5 @@ Route::get('/dashboard', [UserController::class, 'getDashboard'])->name('dashboa
 
 
 Route::get('/fetch-next-n-sentences', [SentenceController::class, 'fetchNextSentences']);
+
 Route::resource('sentences', SentenceController::class);

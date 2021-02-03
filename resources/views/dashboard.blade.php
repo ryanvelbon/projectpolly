@@ -18,7 +18,7 @@
 <div class="container-fluid">
   <div class="row">
     <div id="col1" class="col-md-3">
-      @include('includes.test2')
+      <!-- include sidebar -->
     </div>           
     <div id="col2" class="col-md-4">
 		<section id="publish-sentence">
@@ -41,10 +41,10 @@
 		<section id="sentences">
 				<h2>Today's contributions</h2>
 				@foreach ($sentences as $sentence)
-					@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $sentence->user])
+					@include('includes.sentence-post', ['sentence' => $sentence])
 				@endforeach
-				<div id="sentences-spinner" class="spinner">LOADING</div>
 		</section>
+		<div id="sentences-spinner" class="spinner">LOADING</div>
     </div>
     <div id="col3" class="col-md-5">
       @include('includes.statistics', [])
@@ -70,14 +70,10 @@ $(window).scroll(function() {
 	// if($('body').scrollTop() + $(window).height() == $('body').height()) {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
 
-    	alert("gay");
-
     	// make loading icon visible
-
     	document.getElementById("sentences-spinner").style.display = "block";
 
     	// AJAX request data from server
-
 		$.ajax({
 			type: "GET",
 			url: "/fetch-next-n-sentences",
@@ -85,7 +81,7 @@ $(window).scroll(function() {
 				n: 3
 			},
 			success: function(response) {
-				console.log(response);
+				document.getElementById("sentences").innerHTML += response;
 			},
 			error: function(response) {
 				console.log(response);

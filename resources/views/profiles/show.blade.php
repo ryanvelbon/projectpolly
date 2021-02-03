@@ -68,7 +68,7 @@
 			<div id="sentences" class="section-pane">
 				@if(count($user->sentences))
 					@foreach ($user->sentences as $sentence)
-						@include('includes.sentence-post', ['sentence' => $sentence, 'author' => $user])
+						@include('includes.sentence-post', ['sentence' => $sentence])
 					@endforeach
 				@else
 					<p>No sentences published yet.</p>

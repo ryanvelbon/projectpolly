@@ -2,10 +2,14 @@
   <div class="header">
     <?php 
 
+      $author = $sentence->user;
+
       $bookmark_ids = Session::get('bookmark_ids');
 
       $langFlag = \App\Helpers\Flag::getFlagForLanguage($sentence->lang->code);
+      
       $row = $sentence->likes->where('user_id', '=', Auth::id())->first();
+
 
       /* Which is more optimal for loading current user's like/dislike and bookmark info per sentence:
             1. using session variables; or
