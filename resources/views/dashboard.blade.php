@@ -6,7 +6,7 @@
 
 @section('css')
 	<!-- Temporarily deleted. All styling is being implemented in main.scss -->
-	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}"> -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/dashboard.css') }}">
 @endsection
 
 
@@ -15,12 +15,19 @@
 @section('content')
 
 
-<div class="container-fluid">
-  <div class="row">
-    <div id="col1" class="col-md-3">
-      <!-- include sidebar -->
-    </div>           
-    <div id="col2" class="col-md-4">
+
+
+<!-- include('includes.filter-menu') -->
+<!-- include('includes.statistics', []) -->
+
+
+<div id="dashboard">
+  <!---------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div id="left-column">
+  	@include('includes.vertical-nav')
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div id="center-column">
 		<section id="publish-sentence">
 			<form name="publishSentenceForm" method="POST" action="/sentences">
 				<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
@@ -45,12 +52,25 @@
 				@endforeach
 		</section>
 		<div id="sentences-spinner" class="spinner">LOADING</div>
-    </div>
-    <div id="col3" class="col-md-5">
-      @include('includes.statistics', [])
-    </div>
   </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <div id="right-column">
+	  <div style="background-color:coral;">A</div>
+	  <div style="background-color:lightblue;">B</div>
+	  <div style="background-color:khaki;">C</div>
+	  <div style="background-color:pink;">D</div>
+  </div>
+  
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

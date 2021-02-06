@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/profiles/edit.css": "/css/profiles/edit.css",
     "/css/profiles/show.css": "/css/profiles/show.css",
+    "/css/dashboard.css": "/css/dashboard.css",
     "/css/main.css": "/css/main.css"
 }
