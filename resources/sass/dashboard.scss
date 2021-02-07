@@ -1,9 +1,10 @@
-$left-column-width-with-titles: 200px;
+$left-column-width-with-titles: 280px;
 $left-column-width-icons-only: 50px;
 $center-column-min-width: 450px;
 $right-column-min-width: 300px;
 
-$breakpoint1: $left-column-width-with-titles + $center-column-min-width + $right-column-min-width;
+/*$breakpoint1: $left-column-width-with-titles + $center-column-min-width + $right-column-min-width;*/
+$breakpoint1: 1300px;
 $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-column-min-width;
 
 #dashboard {
@@ -33,6 +34,20 @@ $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-
   flex-grow: 1;
 }
 
+.profile-area-foobar {
+  background-color: blue;
+
+  text-align: center;
+
+  .avatar {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+}
 
 
 .menu-link {
@@ -52,7 +67,7 @@ $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-
   
   .icon {
     width: 30%;
-    text-align: right;
+    text-align: center;
   }
   .title {
     width: 70%;
@@ -64,15 +79,19 @@ $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-
 @media screen and (max-width: $breakpoint1) {  
   #left-column {
     width: $left-column-width-icons-only;
-  }
-  
-  #left-column {
-    .title {
-      display: none;
+
+    .side-menu {
+      .title {
+        display: none;
+      }
+      .icon {
+        width: 100%;
+        text-align: center;
+      }
     }
-    .icon {
-      width: 100%;
-      text-align: center;
+
+    .footer-links {
+      display: none;
     }
   }
 }

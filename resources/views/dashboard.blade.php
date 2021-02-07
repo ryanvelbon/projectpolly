@@ -57,8 +57,12 @@
   <div id="right-column">
 	  <div style="background-color:coral;">A</div>
 	  <div style="background-color:lightblue;">B</div>
-	  <div style="background-color:khaki;">C</div>
-	  <div style="background-color:pink;">D</div>
+	  <div style="background-color:khaki;">
+	  	@include('includes.stats-table-1')
+	  </div>
+	  <div style="background-color:pink;">
+	  	@include('includes.stats-table-2')
+	  </div>
   </div>
   
 </div>
