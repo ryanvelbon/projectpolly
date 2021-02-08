@@ -4,9 +4,11 @@ $center-column-min-width: 450px;
 $center-column-max-width: 600px;
 $right-column-min-width: 300px;
 
+$marginLeft: 30px;
+
 /*$breakpoint1: $left-column-width-with-titles + $center-column-min-width + $right-column-min-width;*/
 $breakpoint1: 1300px;
-$breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-column-min-width;
+$breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-column-min-width + ($marginLeft*2);
 
 #dashboard {
   display: flex;
@@ -15,18 +17,31 @@ $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-
 }
 
 #left-column {
+  
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+
   width: $left-column-width-with-titles;
   flex-shrink: 0;
 }#center-column {
   min-width: $center-column-min-width;
   max-width: $center-column-max-width;
   flex-grow: 1;
-  margin-left: 1px;
+  margin-left: $marginLeft;
   margin-right: 1px;
 }#right-column {
-  width: 800px;
+
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+
+  max-width: 500px;
   display: flex;
   flex-wrap: wrap;
+
+  margin-left: $marginLeft;
+  margin-right: 10px;
 }
 
 
@@ -34,7 +49,6 @@ $breakpoint2: $left-column-width-icons-only + $center-column-min-width + $right-
   min-width: $right-column-min-width;
   min-height: 200px;
   flex-grow: 1;
-  margin: 0px 10px 0px 30px;
 }
 
 

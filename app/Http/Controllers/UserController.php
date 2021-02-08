@@ -32,7 +32,7 @@ class UserController extends Controller
 	public function getDashboard()
 	{
 		$sentences = Sentence::orderByDesc('created_at')
-				->limit(10)
+				->limit(20)
 				->get();
 
 		$languages = Language::where('ranking', '<=', 15)->get();
