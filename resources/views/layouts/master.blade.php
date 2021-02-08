@@ -12,16 +12,16 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal">Project Polly</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">Features</a>
         <a class="p-2 text-dark" href="{{ route('dashboard') }}">Dashboard</a>
-        <a class="p-2 text-dark" href="{{ route('profile.index') }}">Profile</a>
+        
+        @if (Auth::check())
+          @include('includes.profile-dropdown-menu')
+        	<a class="btn btn-outline-primary" href="{{ route('logout') }}">Log out</a>
+        @else
+          <a class="p-2 text-dark" href="{{ route('login') }}">Log in</a>
+        	<a class="btn btn-outline-primary" href="{{ route('signup') }}">Sign up</a>
+        @endif
       </nav>
-      @if (Auth::check())
-      	<a class="btn btn-outline-primary" href="{{ route('logout') }}">Log out</a>
-      @else
-        <a class="p-2 text-dark" href="{{ route('login') }}">Log in</a>
-      	<a class="btn btn-outline-primary" href="{{ route('signup') }}">Sign up</a>
-      @endif
     </div>
 	@yield('content')
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>

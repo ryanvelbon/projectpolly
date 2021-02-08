@@ -24,6 +24,12 @@ body {
   background-color: myColor(bg1);
   color: myColor(text3);
 }
+
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
   
 
 h1, h2, h3, h4, h5, h6 {
@@ -102,9 +108,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
+$postHeight: 100px;
+$flagWidth: 36px;
 
 .sentence-post {
+  /*height: 200px;*/
+  min-width: 400px;
+
   border-top: 1px solid myColor(text3);
   border-bottom: 0px;
   border-left: 0px;
@@ -113,57 +123,95 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0px;
   margin-bottom: 0px;
 
+  a {
+    text-decoration: none;
+  }
+
   &:hover {
     background-color: myColor(bg2);
     cursor: pointer;
   }
 
-  .flag-icon {
-    max-width: 20px;
-    height: auto;
-    float: right;
-    margin-top: 5px;
+  .user-avatar {
+    width: 100px;
+    height: $postHeight;
+    /*background: pink;*/
+    float: left;
+    text-align: center;
+
+    display: inline-block;
+    position: relative;
+
+    .avatar {
+      border-radius: 50%;
+      width: 65px;
+      margin: 5px;
+    }
+
+    .flag-overlay {
+      /*background-color: white;*/
+      position: absolute;
+      top: 50px;
+      left: 18px;
+      z-index: 1;
+
+      .flag-icon {
+        width: 30px;
+      }
+    }
   }
-  
-  .header {
-    margin-top: 2px;
+
+  .main {
+    margin-left: 100px;
+    height: $postHeight;
+    /*background: lightgreen;*/
 
     strong {
       color: myColor(text1);
+      padding-left: 10px;
     }
 
     small {
       color: myColor(text3);
     }
-  }
 
-  .body {
-    margin-top: 0px;
-    margin-bottom: 15px;
-    margin-right: 0px;
-    margin-left: 0px;
-    color: myColor(text2);
+    p {
+      color: myColor(text2);
+      padding: 10px;
+    }
   }
 
   .footer {
-    margin-bottom: 15px;
+    padding-bottom: 15px;
+    /*background-color: lightblue;*/
+    display: flex;
+    justify-content: space-around;
 
-    i {
-      /*background-color: yellow;*/
-      padding: 3px; /* makes focus area larger; easier to click */
-      width: 20px;
+
+    .icon {
+      /*background-color: lightgreen;*/
+      border-radius: 50%;
+      text-align: center;
+      padding: 10px;
+
+
       color: myColor(text3);
-      transition: all .2s ease-in-out;
+      transition: all .4s ease-in-out;
 
       &:hover {
         color: myColor(text1);
-        transform: scale(1.9);
+        transform: scale(1.2);
+      }
+
+      i {
+
       }
     }
 
-    i + i {
-      margin-right: 15%;
-    }
+
+
+
+
 
     .fa-thumbs-up.active {
       color: #5F5;
@@ -178,6 +226,7 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+
 
 .sentence-summary {
 

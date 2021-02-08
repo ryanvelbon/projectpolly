@@ -55,16 +55,19 @@
   </div>
   <!---------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
   <div id="right-column">
-	  <div style="background-color:coral;">A</div>
-	  <div style="background-color:lightblue;">B</div>
-	  <div style="background-color:khaki;">
+	  <div>
+	  	A
+	  </div>
+	  <div>
+	  	B
+	  </div>
+	  <div>
 	  	@include('includes.stats-table-1')
 	  </div>
-	  <div style="background-color:pink;">
+	  <div>
 	  	@include('includes.stats-table-2')
 	  </div>
-  </div>
-  
+  </div> 
 </div>
 
 
