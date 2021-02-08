@@ -23,7 +23,7 @@
 	  <div class="title">Notifications</div>
 	</a>
 
-	<a class="menu-link">
+	<a class="menu-link" href="{{ route('community') }}">
 	  <div class="icon"><i class="fa fa-users"></i></div>
 	  <div class="title">Community</div>
 	</a>

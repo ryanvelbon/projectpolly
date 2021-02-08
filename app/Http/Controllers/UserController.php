@@ -47,6 +47,13 @@ class UserController extends Controller
 								'lang_stats' => $lang_stats]);
 	}
 
+	public function getCommunity()
+	{
+		$members = User::all()->take(9);
+
+		return view('community', ['members' => $members]);
+	}
+
 
 	public function postSignUp(Request $request)
 	{

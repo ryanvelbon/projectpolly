@@ -1,17 +1,17 @@
-@extends('layouts.master')
+@extends('layouts.three-columns')
 
 @section('title')
 	{{ $user->username }}
 @endsection
 
-@section('css')
+@section('head')
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/profiles/show.css') }}">
+	<meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 
 
-
-@section('content')
+@section('centerColumn')
 <div class="container">
 	<h2>{{ $user->first_name }} {{ $user->last_name }}</h2>
 	<p>{{ $user->username }}</p>
@@ -129,38 +129,11 @@
 	  panels.forEach(p => p.classList.remove('active'))
 	  document.getElementById(x).classList.add('active')
 	}
-
-	// follow buttons-------------------------------------------------------------------------------------------------
-	$(".follow-btn").click(function(event) {
-
-		event.preventDefault();
-
-		var btn = this;
-
-		$.ajax({
-			type: "POST",
-			url: "/update-follow",
-			data: {
-				id: $(this).val(),
-				_token: "{{ csrf_token() }}"
-			},
-			success: function(response) {
-				console.log(response);
-				if(response['isFollowing']){
-					$(btn).removeClass("btn-outline-primary not-following");
-					$(btn).addClass("btn-primary following");
-				}else{
-					$(btn).removeClass("btn-primary following");
-					$(btn).addClass("btn-outline-primary not-following");
-				}
-			},
-			error: function(response) {
-				console.log(response);
-			}
-		});
-	});
 </script>
 
+
+
+<script src="{{ asset('js/follow.js') }}"></script>
 <script src="{{ asset('js/sentence.js') }}"></script>
 
 @endsection

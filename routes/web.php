@@ -90,8 +90,7 @@ Route::post('/update-bookmark', [AjaxController::class, 'updateBookmark']);
 
 
 Route::get('/dashboard', [UserController::class, 'getDashboard'])->name('dashboard')->middleware('auth');
-
-
+Route::get('/community', [UserController::class, 'getCommunity'])->name('community')->middleware('auth');
 
 
 

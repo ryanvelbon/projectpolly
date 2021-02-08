@@ -40,7 +40,8 @@
 </nav>
 
 <div id="section1" class="container-fluid bg-success" style="padding-top:70px;padding-bottom:70px">
-  <h1>Section 1</h1>
+  <h1>Make a landing page similar to nextdoor.com</h1>
+
   <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
   <p>Try to scroll this section and look at the navigation bar while scrolling! Try to scroll this section and look at the navigation bar while scrolling!</p>
 </div>
