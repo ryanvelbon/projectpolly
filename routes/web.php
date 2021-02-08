@@ -79,9 +79,7 @@ Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.ed
 Route::resource('profile', ProfileController::class)->only(['index', 'update', 'show'])->middleware('auth');
 
 
-Route::post('/update-follow', [AjaxController::class, 'updateFollow']);
-Route::post('/update-like', [AjaxController::class, 'updateLike']);
-Route::post('/update-bookmark', [AjaxController::class, 'updateBookmark']);
+
 
 
 // Route::get('/dashboard', function () {
@@ -94,6 +92,12 @@ Route::get('/community', [UserController::class, 'getCommunity'])->name('communi
 
 
 
+// AJAX
+Route::post('/update-follow', [AjaxController::class, 'updateFollow']);
+Route::post('/update-like', [AjaxController::class, 'updateLike']);
+Route::post('/update-bookmark', [AjaxController::class, 'updateBookmark']);
 Route::get('/fetch-next-n-sentences', [SentenceController::class, 'fetchNextSentences']);
+Route::get('/fetch-next-n-community-members', [UserController::class, 'fetchNextMembers']);
+
 
 Route::resource('sentences', SentenceController::class);

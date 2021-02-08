@@ -49,9 +49,14 @@ class UserController extends Controller
 
 	public function getCommunity()
 	{
-		$members = User::all()->take(9);
+		// $members = User::all()->take(9);
+		// PENDING: order by most recent log in / last seen
+		$community_member_ids = User::orderByDesc('created_at')->limit(1000)->get()->pluck('id')->toArray();
+		Session::put('community_member_ids', $community_member_ids);
+		Session::put('community_member_ids_pointer', 0);
 
-		return view('community', ['members' => $members]);
+		// return view('community', ['members' => $members]);
+		return view('community');
 	}
 
 
@@ -135,4 +140,34 @@ class UserController extends Controller
 		$request->session()->regenerateToken();
 		return redirect()->route('login');
 	}
+
+    public function fetchNextMembers(Request $request)
+    {
+        $data = $request->all();
+
+        $i = Session::get('community_member_ids_pointer');
+        $n = $data['n'];
+
+        $ids = Session::get('community_member_ids');
+
+        $members = [];
+
+        for($x=$i; $x<$i+$n; $x++){
+            $id = $ids[$x];
+            $member = User::find($id);
+            array_push($members, $member);            
+        }
+
+        $new_pointer = $i + $n;
+
+        Session::put('community_member_ids_pointer', $new_pointer);
+
+        $html = "";
+
+        foreach($members as $member){
+            $html .= view('includes.member-card-alt', ['member' => $member])->render();
+        }
+
+        return $html;
+    }
 }

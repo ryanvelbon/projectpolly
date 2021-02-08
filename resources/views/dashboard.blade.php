@@ -1,13 +1,20 @@
+<?php
+  $current_user = Auth::user();
+  $native_lang = $current_user->profile->native_lang;
+?>
+
+
 @extends('layouts.three-columns')
+
 
 @section('title')
 	Dashboard
 @endsection
 
+
 @section('head')
 	<!-- Temporarily deleted. All styling is being implemented in main.scss -->
 @endsection
-
 
 
 @section('leftColumn')
@@ -19,7 +26,7 @@
 <section id="publish-sentence">
   <form name="publishSentenceForm" method="POST" action="/sentences">
     <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="nativeLang" value="{{Auth::user()->profile->native_lang}}">
+    <input type="hidden" name="nativeLang" value="{{$native_lang}}">
     <div class="form-group">
       <textarea class="form-control" name='new-sentence' id="new-sentence"
            rows="5" placeholder="write a sentence here" spellcheck="false"></textarea>
@@ -50,20 +57,9 @@
 @endsection
 
 
-
-
-
-
-
-
-
-
-
-
-@include('includes.profile-setup', ['languages' => $languages])
-
-
-
+@if(!$native_lang)
+  @include('includes.profile-setup', ['languages' => $languages])
+@endif
 
 
 @section('jsBottom')
@@ -80,23 +76,20 @@ $(window).scroll(function() {
     	document.getElementById("sentences-spinner").style.display = "block";
 
     	// AJAX request data from server
-		$.ajax({
-			type: "GET",
-			url: "/fetch-next-n-sentences",
-			data: {
-				n: 3
-			},
-			success: function(response) {
-				document.getElementById("sentences").innerHTML += response;
-			},
-			error: function(response) {
-				console.log(response);
-			}
-		});
-
-    	// append data to the div
-
-
+  		$.ajax({
+  			type: "GET",
+  			url: "/fetch-next-n-sentences",
+  			data: {
+  				n: 3
+  			},
+  			success: function(response) {
+          // append data to the div
+  				document.getElementById("sentences").innerHTML += response;
+  			},
+  			error: function(response) {
+  				console.log(response);
+  			}
+  		});
     }
 });
 </script>

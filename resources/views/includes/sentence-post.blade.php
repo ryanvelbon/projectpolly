@@ -20,7 +20,7 @@
     }
   ?>
   <div class="user-avatar">
-    <img src="{{ asset('img/profile-pics/1.jpg') }}" alt="Avatar" class="avatar">
+    <img src="{{ asset('img/profile-pics/' . rand(1, 10) . '.jpg') }}" alt="Avatar" class="avatar">
     <div class="flag-overlay">
       <img class="flag-icon" src="{{ asset('img/flags/svg/'.$langFlag.'.svg') }}">        
     </div>

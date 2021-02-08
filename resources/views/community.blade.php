@@ -12,19 +12,14 @@
 
 
 @section('leftColumn')
-	filters
+	@include('includes.vertical-nav')
 @endsection
 
 
 @section('centerColumn')
-
-
-  @foreach($members as $member)
-    @include('includes.member-card-alt', ['member' => $member])
-  @endforeach
-
-
-
+<div id="members">
+	<!-- AJAX response -->
+</div>
 @endsection
 
 
@@ -54,5 +49,34 @@
 
 
 @section('jsBottom')
-  <script src="{{ asset('js/follow.js') }}"></script>
+<script src="{{ asset('js/follow.js') }}"></script>
+<script>
+	function ajaxFetchMembers(n) {
+		$.ajax({
+			type: "GET",
+			url: "/fetch-next-n-community-members",
+			data: {
+				n: n
+			},
+			success: function(response) {
+				document.getElementById("members").innerHTML += response;
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	}
+
+	$(document).ready(function(){
+	  ajaxFetchMembers(15);
+	});
+
+
+	$(window).scroll(function() {
+	    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	// document.getElementById("sentences-spinner").style.display = "block";
+	    	ajaxFetchMembers(3);
+	    }
+	});
+</script>
 @endsection

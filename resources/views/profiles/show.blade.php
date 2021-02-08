@@ -10,6 +10,9 @@
 @endsection
 
 
+@section('leftColumn')
+	@include('includes.vertical-nav')
+@endsection
 
 @section('centerColumn')
 <div class="container">

@@ -99,6 +99,5 @@ class SentenceController extends Controller
         }
 
         return $html;
-        
     }
 }

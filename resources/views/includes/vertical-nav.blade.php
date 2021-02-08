@@ -3,7 +3,7 @@
 	@include('includes.profile-dropdown-menu')
 </div>
 <div class="side-menu">
-	<a class="menu-link">
+	<a class="menu-link" href="{{ route('dashboard') }}">
 	  <div class="icon"><i class="fa fa-home"></i></div>
 	  <div class="title">Home</div>
 	</a>
