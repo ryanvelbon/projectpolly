@@ -13,7 +13,7 @@ class CreateMessagesTable extends Migration
             $table->timestamps();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('conversation_id')->unsigned();
-            $table->string('msg_body', 500);
+            $table->string('msg_body', 8000);
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('conversation_id')->references('id')->on('conversations');

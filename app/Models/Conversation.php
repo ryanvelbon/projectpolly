@@ -7,12 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
+use App\Models\Message;
+use App\Helpers\Custom;
+
 
 class Conversation extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
+
+    // protected $events = [
+    //     'created' => ConversationCreated::class,
+    // ];
+
+
+
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($conversation){
+            $conversation->slug = Custom::generateSlug(10) . time();
+        });
+    }
 
     // this function should only be for group chats
     public function addParticipant($id, $is_admin = 0){
@@ -33,8 +53,7 @@ class Conversation extends Model
 
     public function getParticipantsAttribute()
     {
-        // this is an Accessor Function
-        // allows us to do $myConversation->participants
+        // this is an Accessor Function which allows us to retrieve $this->participants
 
         $results = DB::select('SELECT * FROM conversation_user WHERE conversation_id = ?', [$this->id]);
 
@@ -46,5 +65,16 @@ class Conversation extends Model
         }
 
         return $users;
+    }
+
+    public function getMessagesAttribute()
+    {
+        // this is an Accessor Function which allows us to retrieve $this->messages
+
+        $messages = Message::where('conversation_id', $this->id)
+                                ->orderByDesc('created_at')
+                                ->get();
+
+        return $messages;
     }
 }

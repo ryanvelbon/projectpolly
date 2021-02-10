@@ -11,6 +11,7 @@ class CreateConversationsTable extends Migration
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_group_chat')->default(1);
+            $table->char('slug', 20)->unique();
         });
     }
 

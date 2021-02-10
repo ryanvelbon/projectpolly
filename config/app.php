@@ -228,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Flag' => App\Helper\Flag::class,
+        'Custom' => App\Helper\Custom::class,
 
     ],
 
