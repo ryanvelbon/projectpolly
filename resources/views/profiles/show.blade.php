@@ -24,6 +24,7 @@
 		<button type="button" class="btn btn-outline-primary">Edit Profile</button>
 	@else
 		<button type="button" class="follow-btn btn btn-outline-primary" value="{{ $user->id }}"><span>Follow</span></button>
+		<button type="button" class="btn btn-outline-default" id="sendMsgBtn1">Message</button>
 	@endif
 
 
@@ -119,6 +120,12 @@
 </div>
 @endsection
 
+@section('rightColumn')
+@endsection
+
+@include('includes.send-message-modal')
+
+
 @section('jsBottom')
 
 <script type="text/javascript">
@@ -138,5 +145,5 @@
 
 <script src="{{ asset('js/follow.js') }}"></script>
 <script src="{{ asset('js/sentence.js') }}"></script>
-
+<script src="{{ asset('js/send-message-modal.js') }}"></script>
 @endsection
