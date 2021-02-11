@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\User;
+
 class AjaxController extends Controller
 {
     public function updateFollow(Request $request)
@@ -154,5 +156,48 @@ class AjaxController extends Controller
 
         return response()->json(['success' => 'Record updated.',
                                     'isBookmarked' => $isBookmarked]);
+    }
+
+    public function checkIfPvtConversationAlreadyExists(Request $request)
+    {
+        $data = $request->all();
+
+        $sender_id = (int) $data['senderId'];
+        $recipient_id = (int) $data['recipientId'];
+
+        $sender = User::find($sender_id);
+
+        $conversation = $sender->getPvtConversationWith($recipient_id);
+
+        $already_contacted = (bool) $conversation;
+
+        $url = NULL;
+
+        if($conversation){
+            $url = route('conversations.show', ['conversation' => $conversation->slug ]);
+        }
+
+        return response()->json(['success' => 'Searched database records.',
+                            'alreadyContacted' => $already_contacted,
+                            'url'=> $url]);
+    }
+
+    public function sendInitialMsgPvtConversation(Request $request)
+    {
+        $data = $request->all();
+
+        $sender_id = (int) $data['senderId'];
+        $recipient_id = (int) $data['recipientId'];
+        $msg = $data['msg'];
+
+        $sender = User::find($sender_id);
+
+        $sender->startPvtConversationWith($recipient_id);
+
+        $conversation = $sender->getPvtConversationWith($recipient_id);
+
+        $sender->sendMsg($conversation->id, $msg);
+
+        return response()->json(['success' => 'Message sent!', 'foobar' => 'This is not actually necessary']);
     }
 }

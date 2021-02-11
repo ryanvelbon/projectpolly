@@ -139,11 +139,73 @@
 	  panels.forEach(p => p.classList.remove('active'))
 	  document.getElementById(x).classList.add('active')
 	}
+
+
+
+
+
+
+
+
+
+	$(document).on('click', '#sendMsgBtn1', function(e){
+		$.ajax({
+			type: "GET",
+			url: "/check-if-pvt-conversation-already-exists",
+			data: {
+				senderId: {{Auth::id()}},
+				recipientId: {{$user->id}}
+			},
+			success: function(response) {
+				console.log(response);
+				if(response['alreadyContacted']){
+					window.location = response['url'];
+				}else {
+					$('#sendMsgModal').modal('show');
+				}
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	});
+
+
+	$('#sendMsgModalForm').on('submit', function(e){
+		e.preventDefault();
+		var msgText = $('#sendMsgModalForm').find('textarea[name="msgText"]').val();
+		$.ajax({
+			type: "POST",
+			url: "/send-initial-msg-pvt-conversation",
+			data: {
+				senderId: {{Auth::id()}},
+				recipientId: {{$user->id}},
+				msg: msgText,
+				_token: "{{csrf_token()}}"
+			},
+			success: function(response) {
+				console.log(response);
+				$('#sendMsgModal').modal('hide');
+			},
+			error: function(response) {
+				console.log(response);
+			}
+		});
+	});
+
+
+	$(document).on('input', '#msgText', function(e){
+		var length = $(this).val().length;
+		if(length<1)
+			$('#sendMsgBtn2').prop( "disabled", true );
+		else
+			$('#sendMsgBtn2').prop( "disabled", false );
+	});
+
 </script>
 
 
 
 <script src="{{ asset('js/follow.js') }}"></script>
 <script src="{{ asset('js/sentence.js') }}"></script>
-<script src="{{ asset('js/send-message-modal.js') }}"></script>
 @endsection

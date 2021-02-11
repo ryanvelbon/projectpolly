@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SentenceController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\ConversationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +99,13 @@ Route::post('/update-like', [AjaxController::class, 'updateLike']);
 Route::post('/update-bookmark', [AjaxController::class, 'updateBookmark']);
 Route::get('/fetch-next-n-sentences', [SentenceController::class, 'fetchNextSentences']);
 Route::get('/fetch-next-n-community-members', [UserController::class, 'fetchNextMembers']);
+Route::get('/check-if-pvt-conversation-already-exists', [AjaxController::class, 'checkIfPvtConversationAlreadyExists']);
+Route::post('/send-initial-msg-pvt-conversation', [AjaxController::class, 'sendInitialMsgPvtConversation']);
+
+
+
 
 
 Route::resource('sentences', SentenceController::class);
+
+Route::resource('conversations', ConversationController::class)->only(['index', 'store', 'create', 'show']);

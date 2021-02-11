@@ -140,7 +140,6 @@ class User extends Model implements Authenticatable
             $c->save();
             DB::insert('INSERT INTO conversation_user (conversation_id, user_id) values(?,?)', [$c->id, $this->id]);
             DB::insert('INSERT INTO conversation_user (conversation_id, user_id) values(?,?)', [$c->id, $id]);
-            echo("Private conversation created");
         }else {
             throw new Exception("A private conversation between these two users already exists.");
         }

@@ -17,14 +17,6 @@ class Conversation extends Model
 
     public $timestamps = false;
 
-    // protected $events = [
-    //     'created' => ConversationCreated::class,
-    // ];
-
-
-
-
-
     public static function boot()
     {
         parent::boot();
