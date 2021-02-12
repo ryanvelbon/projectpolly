@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         	ProfileSeeder::class,
         	FollowingsTableSeeder::class,
         	SentenceSeeder::class,
+
+            ConversationSeeder::class, // seeds these tables: `conversations`, `conversation_user`, `messages`
+
         ]);
     }
 }

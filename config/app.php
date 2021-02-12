@@ -229,6 +229,7 @@ return [
 
         'Flag' => App\Helper\Flag::class,
         'Custom' => App\Helper\Custom::class,
+        'Lorem' => App\Helper\Lorem::class,
 
     ],
 
