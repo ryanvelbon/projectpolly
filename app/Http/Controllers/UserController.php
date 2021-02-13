@@ -31,9 +31,6 @@ class UserController extends Controller
 
 	public function getDashboard()
 	{
-		$sentences = Sentence::orderByDesc('created_at')
-				->limit(20)
-				->get();
 
 		$languages = Language::where('ranking', '<=', 15)->get();
 
@@ -41,8 +38,7 @@ class UserController extends Controller
 
 		$lang_stats = DB::select('SELECT * FROM calc_lang_stats ORDER BY lang_id ASC');
 
-		return view('dashboard', ['sentences' => $sentences,
-								'languages' => $languages,
+		return view('dashboard', ['languages' => $languages,
 								'countries' => $countries,
 								'lang_stats' => $lang_stats]);
 	}

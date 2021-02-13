@@ -42,9 +42,7 @@
 </section>
 <section id="sentences">
     <h2>Today's contributions</h2>
-    @foreach ($sentences as $sentence)
-      @include('includes.sentence-post', ['sentence' => $sentence])
-    @endforeach
+    <!-- HTML generated via AJAX -->
 </section>
 <div id="sentences-spinner" class="spinner">LOADING</div>
 @endsection
@@ -63,35 +61,44 @@
 
 
 @section('jsBottom')
-<script src="{{ asset('js/publish-sentence.js') }}"></script>
-<script src="{{ asset('js/sentence.js') }}"></script>
-<script src="{{ asset('js/profile-setup.js') }}"></script>
+  <script src="{{ asset('js/publish-sentence.js') }}"></script>
+  <script src="{{ asset('js/sentence.js') }}"></script>
+  @if(!$native_lang)
+    <script src="{{ asset('js/profile-setup.js') }}"></script>
+  @endif
 
-<script>
-$(window).scroll(function() {
-	// if($('body').scrollTop() + $(window).height() == $('body').height()) {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+  <script>
 
-    	// make loading icon visible
-    	document.getElementById("sentences-spinner").style.display = "block";
+  function fetchAndRenderNextSentences(n) {
+    $.ajax({
+      type: "GET",
+      url: "/fetch-next-n-sentences",
+      data: {
+        n: n
+      },
+      success: function(response) {
+        // append data to the div
+        document.getElementById("sentences").innerHTML += response;
+      },
+      error: function(response) {
+        console.log(response);
+      }
+    });
+  }
 
-    	// AJAX request data from server
-  		$.ajax({
-  			type: "GET",
-  			url: "/fetch-next-n-sentences",
-  			data: {
-  				n: 3
-  			},
-  			success: function(response) {
-          // append data to the div
-  				document.getElementById("sentences").innerHTML += response;
-  			},
-  			error: function(response) {
-  				console.log(response);
-  			}
-  		});
-    }
-});
-</script>
+  $(document).ready(function() {
+    fetchAndRenderNextSentences(20);
+  });
 
+  $(window).scroll(function() {
+      if($(window).scrollTop() == $(document).height() - $(window).height()) {
+
+      	// make loading icon visible
+      	document.getElementById("sentences-spinner").style.display = "block";
+
+      	// AJAX request data from server
+        fetchAndRenderNextSentences(10);
+      }
+  });
+  </script>
 @endsection
