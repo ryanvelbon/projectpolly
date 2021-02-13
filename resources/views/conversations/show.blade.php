@@ -26,16 +26,16 @@
 
 
 @section('centerColumn')
-	<div class="conversation">
-	    <div class="header">
+	<div id="conversation-container">
+	    <div id="conv-header">
 	    	<h2>{{$conversation_title}}</h2>
 	    </div>
-	    <div class="body">
+	    <div id="conv-body">
 			@foreach($c->messages as $msg)
 				@include('includes.message', ['msg' => $msg])
 			@endforeach
 	    </div>
-	    <div class="footer">
+	    <div id="conv-footer">
 	      <div class="input-group mb-3">
 	        <textarea class="control-form" id="conversation-textarea"></textarea>
 	        <div class="input-group-append">
@@ -54,9 +54,35 @@
 
 @section('jsBottom')
 <script type="text/javascript">
-  $('body').on('keydown input', '#conversation-textarea', function() {
-    this.style.removeProperty('height');
-    this.style.height = (this.scrollHeight+2) + 'px';
-  });
+
+	$('body').on('keydown input', '#conversation-textarea', function() {
+		this.style.removeProperty('height');
+		this.style.height = (this.scrollHeight+2) + 'px';
+	});
+
+	$(document).ready(function() {
+		// by default, scroll to the very bottom of conversation upon load
+		var myDiv = document.getElementById('conv-body');
+		myDiv.scrollTop = myDiv.scrollHeight;
+	});
+
+	$('#conv-body').on('scroll', function() {
+		if($(this).scrollTop() == 0){
+	  		$.ajax({
+	  			type: "GET",
+	  			url: "/fetch-prev-n-messages",
+	  			data: {
+	  				n: 5
+	  			},
+	  			success: function(response) {
+	          		// prepend data to the div
+	  				this.innerHTML = response + this.innerHTML;
+	  			},
+	  			error: function(response) {
+	  				console.log(response);
+	  			}
+	  		});
+		}
+	});
 </script>
 @endsection
