@@ -60,6 +60,111 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.conversation{
+  .header {
+    background-color:lightblue;
+  }
+  .body {
+    background-color:pink;
+
+    /*max-height: 400px;*/
+    overflow-y: scroll; height:600px;
+    
+    .msg-container {
+      
+      &.is-current-user {
+        background-color: yellow;
+        text-align: right;
+      }
+    }
+    
+    .msg {
+      position: relative; // this is for positioning .sent_at
+      border: 1px solid #ddd;
+      box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
+      background-color: #fff;
+      font-family: helvetica;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 15px;
+      display: inline-block;
+      
+      .sent_at {
+        font-size: 10px;
+        
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        
+      }
+    }
+    
+    // overrides .msg styling
+    .msg-container.is-current-user .msg{
+      border: none;
+      background-color: #eee;
+    }
+    
+    
+  }
+  .footer{
+    background-color:lightgreen;
+
+    .input-group {
+      /*box-sizing: border-box;*/
+      background-color: lightblue;
+      justify-content: center;
+      padding: 20px;
+
+      textarea {
+        width: 85%;
+        max-height: 100px;
+      }
+      .input-group-append {
+        width: 15%;
+
+        button {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .language-menu {
   box-sizing: border-box;
   padding: 20px;
