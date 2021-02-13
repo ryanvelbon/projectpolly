@@ -101,7 +101,7 @@ Route::get('/fetch-next-n-sentences', [SentenceController::class, 'fetchNextSent
 Route::get('/fetch-next-n-community-members', [UserController::class, 'fetchNextMembers']);
 Route::get('/check-if-pvt-conversation-already-exists', [AjaxController::class, 'checkIfPvtConversationAlreadyExists']);
 Route::post('/send-initial-msg-pvt-conversation', [AjaxController::class, 'sendInitialMsgPvtConversation']);
-
+Route::get('/fetch-prev-n-messages-of-conversation', [AjaxController::class, 'fetchPrevMsgs']);
 
 
 

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
+use App\Models\Message;
 
 class AjaxController extends Controller
 {
@@ -199,5 +200,40 @@ class AjaxController extends Controller
         $sender->sendMsg($conversation->id, $msg);
 
         return response()->json(['success' => 'Message sent!', 'foobar' => 'This is not actually necessary']);
+    }
+
+    public function fetchPrevMsgs(Request $request)
+    {
+        /*
+         * alternative solution
+         * Is it possible to fetch all messages, store in cache, and retrieve
+         * last n items from the cached array every time a request is sent?
+         */
+        $data = $request->all();
+
+        $n = $data['n'];
+        $conv_id = $data['conversationId'];
+        $oldest_timestamp = Session::get('conversation_timestamp_pointer');
+
+        $messages = Message::where('conversation_id', '=', $conv_id)
+                            ->where('created_at', '<', $oldest_timestamp)
+                            ->orderBy('created_at', 'DESC')
+                            ->limit($n)
+                            ->get();
+
+        $html = "";
+
+        if(sizeof($messages)>0){
+
+            // update session variable
+            $oldest_timestamp = $messages[sizeof($messages)-1]->created_at;
+            Session::put('conversation_timestamp_pointer', $oldest_timestamp);
+
+            foreach($messages as $msg){
+                $html = view('includes.message', ['msg' => $msg])->render() . $html;
+            }
+        }
+
+        return $html;
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\Conversation;
+use App\Models\Message;
 
 class ConversationController extends Controller
 {
@@ -31,8 +33,10 @@ class ConversationController extends Controller
     {
         $c = Conversation::where('slug', '=', $slug)->first();
 
-        return view('conversations.show', ['c' => $c]);
+        $timestamp_now = date("Y-m-d H:i:s", strtotime(now()));
+        Session::put('conversation_timestamp_pointer', $timestamp_now);
 
+        return view('conversations.show', ['c' => $c]);
     }
 
 }
