@@ -187,11 +187,10 @@ class AjaxController extends Controller
     {
         $data = $request->all();
 
-        $sender_id = (int) $data['senderId'];
         $recipient_id = (int) $data['recipientId'];
         $msg = $data['msg'];
 
-        $sender = User::find($sender_id);
+        $sender = Auth::user();
 
         $sender->startPvtConversationWith($recipient_id);
 
@@ -200,6 +199,18 @@ class AjaxController extends Controller
         $sender->sendMsg($conversation->id, $msg);
 
         return response()->json(['success' => 'Message sent!', 'foobar' => 'This is not actually necessary']);
+    }
+
+    public function sendMsg(Request $request)
+    {
+        $data = $request->all();
+
+        $conversation_id = (int) $data['convId'];
+        $msg = $data['msg'];
+
+        Auth::user()->sendMsg($conversation_id, $msg);
+
+        return response()->json(['success' => 'Message sent!']);
     }
 
     public function fetchPrevMsgs(Request $request)

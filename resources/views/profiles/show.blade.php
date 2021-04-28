@@ -178,7 +178,6 @@
 			type: "POST",
 			url: "/send-initial-msg-pvt-conversation",
 			data: {
-				senderId: {{Auth::id()}},
 				recipientId: {{$user->id}},
 				msg: msgText,
 				_token: "{{csrf_token()}}"

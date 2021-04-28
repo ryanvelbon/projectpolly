@@ -45,7 +45,7 @@
             <h4>I am from ... </h4>
             <select class="form-control" name="nationality">
               @foreach($countries as $country)
-                <option value="{{ $country->id }}">{{ $country->title }}</option>
+                <option value="{{ $country->id }}">{{ $country->nicename }}</option>
               @endforeach
             </select>
           </div>
