@@ -1,4 +1,4 @@
-This directory contains useful files, primarily .xlsx and .json files, containing data which can be processed and stored in the database.
+This directory contains useful files, primarily .xlsx, .csv and .json files, containing data which can be processed and stored in the database.
 
 
 languages.csv

@@ -66,7 +66,7 @@ class ConversationSeeder extends Seeder
 
 	    $time_start = microtime(true);
 
-	    $n = 1000;
+	    $n = 100; // number of conversations
 	    $avg_msgs_per_conversation = 50;
 
         seedConversationsTable($n);

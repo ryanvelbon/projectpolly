@@ -9,13 +9,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-        	// LanguagesTableSeeder::class, // manually import app\database\raw\languages.csv
+        	LanguagesTableSeeder::class,
             CountriesTableSeeder::class,
         	UserSeeder::class,
         	ProfileSeeder::class,
         	FollowingsTableSeeder::class,
         	SentenceSeeder::class,
-
             ConversationSeeder::class, // seeds these tables: `conversations`, `conversation_user`, `messages`
 
         ]);

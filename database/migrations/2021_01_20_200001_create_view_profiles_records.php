@@ -19,8 +19,8 @@ class CreateViewProfilesRecords extends Migration
                 users.last_name,
                 languages.title AS language,
                 languages.code AS language_code,
-                countries.title AS country,
-                countries.code AS country_code,
+                countries.nicename AS country,
+                countries.iso AS country_code,
                 TIMESTAMPDIFF(YEAR, profiles.dob, CURDATE()) AS age,
                 CASE WHEN profiles.gender = '1' THEN 'm'
                     WHEN profiles.gender = '0' THEN 'f'

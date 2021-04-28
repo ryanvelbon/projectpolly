@@ -9,22 +9,19 @@ class LanguagesTableSeeder extends Seeder
 {
     public function run()
     {
-   //  	$array = array(
-   //  		"de" => "German",
-   //  		"en" => "English",
-   //  		"es" => "Spanish",
-   //          "fr" => "French",
-   //          "id" => "Indonesian",
-   //          "it" => "Italian",
-   //          "pt" => "Portuguese",
-   //          "tr" => "Turkish",
-   //  	);
+      $file = fopen(database_path().'/raw/languages.csv', 'r');
 
-   //  	foreach ($array as $k => $v) {
-			// DB::table('languages')->insert([
-	  //       	'code' => $k,
-	  //       	'title' => $v,
-	  //       ]);
-   //  	}
+      fgets($file); // read first line so that it is excluded from the while loop since this line contains the column names rather than a data entry
+
+      while (($line = fgetcsv($file, null, ';')) !== FALSE) {
+        //$line is an array of the csv elements
+        DB::table('languages')->insert([
+          'code' => $line[1],
+          'title' => $line[2],
+          'title_native' => $line[3],
+          'ranking' => $line[4],
+        ]);
+      }
+      fclose($file);
     }
 }

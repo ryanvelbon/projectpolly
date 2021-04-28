@@ -13,7 +13,7 @@
 	  <div class="title">Profile</div>
 	</a>
 
-	<a class="menu-link">
+	<a class="menu-link" href="{{ route('conversations.index') }}">
 	  <div class="icon"><i class="fa fa-comments"></i></div>
 	  <div class="title">Messages</div>
 	</a>

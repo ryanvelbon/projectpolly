@@ -16,7 +16,7 @@ class SentenceSeeder extends Seeder
 
     	foreach($users as $user){
 
-    		for($i=0; $i<rand(0,30); $i++){
+    		for($i=0; $i<rand(0,5); $i++){
     			
     			$sentence = new Sentence();
 

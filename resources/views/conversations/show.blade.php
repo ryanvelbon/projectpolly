@@ -9,11 +9,12 @@
 
 
 @section('leftColumn')
+	@include('includes.conversations-nav', ['conversations' => $conversations])
 @endsection
 
 <?php
 	if($c->is_group_chat){
-		
+		$conversation_title = "group chat FOOBAR";
 	}else{
 		if($c->participants[0] == Auth::user()){
 			$recipient = $c->participants[1];

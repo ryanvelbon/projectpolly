@@ -95,12 +95,19 @@ class User extends Model implements Authenticatable
 
     public function getConversationsAttribute()
     {
-        $results = DB::select('SELECT * FROM conversation_user WHERE user_id = ?', [$this->id]);
+        $results = DB::select('
+            SELECT id
+            FROM conversation_user
+            INNER JOIN conversations ON conversation_user.conversation_id=conversations.id
+            WHERE user_id = ?
+            ORDER BY conversations.last_msg_sent_at DESC;
+            ', [$this->id]);
+
 
         $conversations = array();
 
         foreach($results as $result){
-            $conversation = Conversation::find($result->conversation_id);
+            $conversation = Conversation::find($result->id);
             array_push($conversations, $conversation);
         }
 
@@ -140,6 +147,8 @@ class User extends Model implements Authenticatable
             $c->save();
             DB::insert('INSERT INTO conversation_user (conversation_id, user_id) values(?,?)', [$c->id, $this->id]);
             DB::insert('INSERT INTO conversation_user (conversation_id, user_id) values(?,?)', [$c->id, $id]);
+            print "SUCCESS: created conversation with slug " . $c->slug;
+            return $c;
         }else {
             throw new Exception("A private conversation between these two users already exists.");
         }
@@ -180,8 +189,11 @@ class User extends Model implements Authenticatable
         // send response on success/fail
         // is this SQL query prone to an SQL injection?
 
+        $timestamp = date('Y-m-d H:i:s');
+
         DB::insert('INSERT INTO messages (created_at, user_id, conversation_id, msg_body) values(?,?,?,?)',
-                                        [date('Y-m-d H:i:s'), $this->id, $conversation_id, $text]);
+                                        [$timestamp, $this->id, $conversation_id, $text]);
+        DB::update('UPDATE conversations SET last_msg_sent_at = ? WHERE id = ?', [$timestamp, $conversation_id]);
 
     }
 }
