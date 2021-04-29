@@ -69,4 +69,13 @@ class Conversation extends Model
 
         return $messages;
     }
+
+    public function getLastMsgAttribute()
+    {
+        $msg = Message::where('conversation_id', $this->id)
+                                ->orderByDesc('created_at')
+                                ->first();
+
+        return $msg;
+    }
 }

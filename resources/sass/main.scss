@@ -66,8 +66,88 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+$convPreviewH: 60px;
+$avatarPadding: 3px;
 
+#conversation-sidenav {
+  .conversation-preview {
+    position: relative;
 
+    border-radius: 0px;
+    margin-top: 0px;
+    margin-bottom: 2px;
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+
+    .mimic-link { 
+      position:absolute; 
+      width:100%;
+      height:100%;
+      top:0;
+      left: 0;
+
+      z-index: 1;
+
+      /*background-image: url('empty.gif');  PENDING: fixes overlap error in IE7/8, make sure you have an empty gif */
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: myColor(bg2);
+      cursor: pointer;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .user-avatar {
+      background-color: pink;
+      width: 60px;
+      height: $convPreviewH;
+      float: left;
+      text-align: center;
+
+      display: inline-block;
+      position: relative;
+
+      .avatar {
+        border-radius: 50%;
+        width: $convPreviewH - $avatarPadding*2;
+        padding: $avatarPadding;
+      }
+    }
+
+    .main {
+      height: $convPreviewH;
+
+      padding-top: 5px;
+
+      strong {
+        color: myColor(text1);
+        
+      }
+
+      small {
+        color: myColor(text3);
+        float: right;
+        padding-right: 5px;
+      }
+
+      p {
+        color: myColor(text2);
+        
+      }
+
+      .last-msg-preview {
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
 
 
 
@@ -312,11 +392,6 @@ $flagWidth: 36px;
 
       }
     }
-
-
-
-
-
 
     .fa-thumbs-up.active {
       color: #5F5;
