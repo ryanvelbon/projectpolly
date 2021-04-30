@@ -104,7 +104,14 @@
 		}
 	});
 
-	$('#sendMsgForm').on('submit', function(e){
+	$("#conversation-textarea").keypress(function (e) {
+	    if(e.which === 13 && !e.shiftKey) {
+	        e.preventDefault();
+	        $("#sendMsgForm").submit();
+	    }
+	});
+
+	$("#sendMsgForm").submit(function (e) {
 		e.preventDefault();
 		var convId = $('#convId').val();
 		var msg = $('#conversation-textarea').val();
@@ -118,8 +125,9 @@
 			},
 			success: function(response) {
 				console.log(response);
-				// clear textarea
+				// clears textarea
 				$('#conversation-textarea').val("");
+				$('#conversation-textarea').focus();
 			},
 			error: function(response) {
 				console.log(response);

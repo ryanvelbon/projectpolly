@@ -18,6 +18,19 @@
 				}
 				$conversation_title = $interlocutor->first_name . " " . $interlocutor->last_name;
 			}
+
+			// format the timestamp
+			$sent_at = $c->lastMsg->created_at;
+			$time_diff = strtotime(now()) - strtotime($sent_at);
+			if($time_diff < 86400){
+				$sent_at_niceformat = date("H:i" , strtotime($sent_at));
+			}else if($time_diff < 2*86400){
+				$sent_at_niceformat = "yesterday";
+			}else if($time_diff < 7*86400){
+				$sent_at_niceformat = date("D" , strtotime($sent_at));
+			}else {
+				$sent_at_niceformat = date("d/m/Y" , strtotime($sent_at));				
+			}
 		?>
 
 		
@@ -39,7 +52,7 @@
 		    
 		    <small><a href="#" data-toggle="tooltip" data-placement="bottom"
 		              title="{{ date('h:i A M d, Y', strtotime($c->lastMsg->created_at)) }}">
-		      {{ date("H:i" , strtotime($c->lastMsg->created_at)) }}
+		      {{ $sent_at_niceformat }}
 		    </a></small>
 
 		    <p class="last-msg-preview">{{ $c->lastMsg->msg_body }}</p>

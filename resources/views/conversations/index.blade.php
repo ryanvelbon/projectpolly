@@ -12,6 +12,9 @@
 
 @section('centerColumn')
 	<h1>Welcome to your Inbox</h1>
+	@if(!$conversations)
+		<h2>Inbox is empty</h2>
+	@endif
 @endsection
 
 
