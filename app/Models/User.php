@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 
 use App\Models\Sentence;
-
+use App\Models\Message;
+use App\Events\MessageSent;
 
 
 class User extends Model implements Authenticatable
 {
     use HasFactory;
     use \Illuminate\Auth\Authenticatable;
+    // use App\Events\MessageSent;  is this necessary??????
 
 
     public function profile()
@@ -191,9 +193,16 @@ class User extends Model implements Authenticatable
 
         $timestamp = date('Y-m-d H:i:s');
 
-        DB::insert('INSERT INTO messages (created_at, user_id, conversation_id, msg_body) values(?,?,?,?)',
-                                        [$timestamp, $this->id, $conversation_id, $text]);
+        $msg = new Message();
+        $msg->user_id = $this->id;
+        $msg->conversation_id = $conversation_id;
+        $msg->msg_body = $text;
+        $msg->save();
+
         DB::update('UPDATE conversations SET last_msg_sent_at = ? WHERE id = ?', [$timestamp, $conversation_id]);
 
+        // broadcast an event to all subscribers to a given channel except for the current user
+        // broadcast(new MessageSent($msg->id))->toOthers();
+        // BUG: Executing the above command returns a 500 Internal Server Error "Unable to Connect to Pusher"
     }
 }
