@@ -46,13 +46,17 @@ class UserController extends Controller
 
 	public function getCommunity()
 	{
-		// $members = User::all()->take(9);
 		// PENDING: order by most recent log in / last seen
-		$community_member_ids = User::orderByDesc('created_at')->limit(1000)->get()->pluck('id')->toArray();
+		$community_member_ids = User::where('id', '!=' , Auth::id())
+									->orderByDesc('created_at')
+									->limit(1000)
+									->get()
+									->pluck('id')
+									->toArray();
+
 		Session::put('community_member_ids', $community_member_ids);
 		Session::put('community_member_ids_pointer', 0);
 
-		// return view('community', ['members' => $members]);
 		return view('community');
 	}
 

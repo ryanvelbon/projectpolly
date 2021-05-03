@@ -20,6 +20,10 @@ class AjaxController extends Controller
     	$follower = Auth::id();
     	$followed = (int) $data['id'];
 
+        if($follower == $followed) {
+            return response()->json(['error' => 'You cannot follow yourself. lol']);
+        }
+
         $session_array = Session::get('following_ids');
 
 
