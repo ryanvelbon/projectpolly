@@ -31,6 +31,7 @@ class UserController extends Controller
 
 	public function getDashboard()
 	{
+		$this->setSessions();
 
 		$languages = Language::where('ranking', '<=', 15)->get();
 

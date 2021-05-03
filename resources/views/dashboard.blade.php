@@ -14,6 +14,7 @@
 
 @section('head')
 	<!-- Temporarily deleted. All styling is being implemented in main.scss -->
+  <meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 
@@ -61,8 +62,7 @@
 
 
 @section('jsBottom')
-  <script src="{{ asset('js/publish-sentence.js') }}"></script>
-  <script src="{{ asset('js/sentence.js') }}"></script>
+
   @if(!$native_lang)
     <script src="{{ asset('js/profile-setup.js') }}"></script>
   @endif
@@ -101,4 +101,6 @@
       }
   });
   </script>
+  <script src="{{ asset('js/publish-sentence.js') }}"></script>
+  <script src="{{ asset('js/sentence.js') }}"></script>
 @endsection

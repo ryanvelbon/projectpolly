@@ -1,6 +1,7 @@
-
-$(".like-btn, .dislike-btn").click(function(event) {
-
+// Do not use click() on dynamically generated elements.
+// a non-dynamic parent selector has to be used. For more info read: https://stackoverflow.com/questions/6658752/click-event-doesnt-work-on-dynamically-generated-elements
+$("#sentences").on("click", ".like-btn, .dislike-btn", function(event) {
+	
 	event.preventDefault();
 
 	id = $(this).data("sentence-id");
@@ -11,7 +12,7 @@ $(".like-btn, .dislike-btn").click(function(event) {
 		data: {
 			sentenceId: id,
 			isLike: $(event.target).attr('class').includes('thumbs-up'),
-			_token: $("#_token").val()
+			_token: $('meta[name=_token]').attr('content')
 		},
 		success: function(response) {
 			// deactivate both icons
@@ -36,7 +37,10 @@ $(".like-btn, .dislike-btn").click(function(event) {
 	});
 });
 
-$(".fa-bookmark").click(function(event) {
+$("#sentences").on("click", ".fa-bookmark", function(event) {
+
+	event.preventDefault();
+
 	id =$(this).data("sentence-id");
 
 	$.ajax({
@@ -44,7 +48,7 @@ $(".fa-bookmark").click(function(event) {
 		url: "/update-bookmark",
 		data: {
 			sentenceId: id,
-			_token: $("#_token").val()
+			_token: $('meta[name=_token]').attr('content')
 		},
 		success: function(response) {
 			if(response['isBookmarked']) {
